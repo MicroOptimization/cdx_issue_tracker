@@ -21,7 +21,7 @@
 - User Management System
   - For Project Managers (and site admins)
 
-##Technologies
+## Technologies
 I'm thinking of doing this with flask, html, css (might try bootstrap, but 
 I think it's nice to learn some more css). I haven't decided what database to
 use yet, but probably not sqlite again. Maybe Postgres or Mongo. I'm also
