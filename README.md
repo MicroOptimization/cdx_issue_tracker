@@ -1,7 +1,7 @@
 # We're gonna make a jira-like web app
 
 ## Essential Features: 
--Users (Login, password (hashed), projects that they're associated with)
+- Users (Login, password (hashed), projects that they're associated with)
  -Login
  -Create User
  -Password Reset
