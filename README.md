@@ -2,7 +2,7 @@
 
 ## Essential Features: 
 - Users (Login, password (hashed), projects that they're associated with)
- - Login
+  - Login
  - Create User
  - Password Reset
   - Activated via email
