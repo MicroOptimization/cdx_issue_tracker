@@ -24,10 +24,9 @@ We're gonna make a jira-like web app that helps teams manage tickets.
 
 ## Technologies
 I'm thinking of doing this with flask, html, css (might try bootstrap, but 
-I think it's nice to learn some more css). I haven't decided what database to
-use yet, but probably not sqlite again. Maybe Postgres or Mongo. I'm also
-trying to decide whether or not I should host this on my personal domain (jackiezhen.com)
-or to buy a more generic domain for it (codiacstech.com)
+I think it's nice to learn some more css). We're gonna use postgres for this.
+I'm also trying to decide whether or not I should host this on my personal 
+domain (jackiezhen.com) or to buy a more generic domain for it (codiacstech.com)
 
 After this, I think I'll learn Node and React lol.
 
@@ -49,3 +48,10 @@ After this, I think I'll learn Node and React lol.
 ### Executability
 - This isn't exactly something I haven't done, it's more like an amalgamation of things I've done, but on a bigger scale.
   - So essentially this project is doable, but has some more meat on its bones than what I've done in the past
+
+## Improvements over Jira:
+(Most of this is personal preference after using a bit of jira on my own)
+- Better child issue visualization 
+  - I want child issues to look like the way this list is formatted
+  - This makes it easier to break down large problems in a more visual sense
+  - Jira makes me have to click on the issue to see it's children, which I don't like
