@@ -1,0 +1,36 @@
+{% extends 'boilerplate.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base_navbars.css') }}">
+
+    {% block innerhead %}
+    {% endblock %}
+
+{% endblock %}
+
+
+
+{% block body %}
+<div class="page_container">
+    <div class="top_bar">
+        <label class="logo">LOGO</label>
+        
+    </div>
+
+    <div class="hori_layout">
+        <div class="left_bar">
+            <a>Tickets</a>
+            <a>Projects</a>
+            <a>Profile</a>
+            <hr id="lb_line">
+        </div>
+
+        <div class="innerbody_wrapper">
+            <!-- actual page content goes in the innerbody block in the future child of this page-->
+            {% block innerbody %}
+            
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
