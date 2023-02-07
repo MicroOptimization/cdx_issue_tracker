@@ -1,0 +1,84 @@
+body {
+    background-image: url('/static/images/login_background.jpg');
+    height: 100vh;
+    display:flex;
+    flex-direction:column;
+    /*justify-content:center;*/
+    align-items:center;
+    font-family:Arial, Helvetica, sans-serif;
+
+    overflow: hidden;
+
+}
+
+.logo_div {
+    height:33%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.logo {
+    font-size:125px;
+    color: white;
+}
+
+
+.header_div {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:35%;
+}
+
+.user_icon {
+    font-size:30px;
+    margin-right:10px;
+}
+
+.login_header {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+form {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+
+    width:50%;
+    height:40%;
+}
+
+form * {
+    width:60%
+}
+
+.login_container {
+    height: 30%;
+    width: 25%;
+    background:rgb(188, 195, 207, 0.8);
+    
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    border-radius:50px;
+}
+
+.link_container {
+    height:25%;
+    
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
+}
+
+#login_button {
+    width:25%;
+    border-radius:7px;
+    border-width:1px;
+    
+}

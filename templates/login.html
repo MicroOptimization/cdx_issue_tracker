@@ -1,12 +1,30 @@
 {% extends 'boilerplate.html' %}
 
 {% block head %}
+<script src="https://kit.fontawesome.com/8b14f8f266.js" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
 {% endblock %}
 
 
 {% block body %}
-<h1>LOGO</h1>
-<div class="login_container">
-</div>
+<div class="logo_div"><h1 class="logo">LOGO</h1></div>
 
+<div class="login_container">
+    <div class="header_div">
+        <i class="fa-solid fa-user user_icon"></i> 
+        <h2 class="login_header">Bug Tracker</h2>
+    </div>
+    <form class="login_form">
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <input type="submit" value="Login" id="login_button">
+    </form>
+
+    <div class="link_container">
+        <a>Create account</a>
+        <a>Forgot password?</a>
+    </div>
+</div>
 {% endblock %}
