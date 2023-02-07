@@ -1,5 +1,61 @@
 .innerbody {
     height:100%;
     width:100%;
+
+    margin:0px;
+    padding:0px;
+
+    display:flex;
+    flex-direction: column;
     
+    align-items:center;
+}
+
+
+.ticket_card, .project_card {
+    height: 80%;
+    width: 25%;
+    background-color:white;
+    border:1px solid black;
+}
+
+.card_wrapper {
+    height: 40%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.welcomeback_wrapper {
+    height:30%;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+
+
+
+.new_ticket_div {
+    display:flex;
+    flex-direction:column;
+}
+
+.ticket_list_header {
+    border-bottom:1px solid black;
+    padding-bottom:7px;
+    margin-bottom:0px;
+}
+
+.ticket_list {
+    
+
+}
+
+.lb_line {
+    width:100%;
+    margin:0px;
 }

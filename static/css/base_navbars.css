@@ -30,7 +30,6 @@ a {
 .page_container {
     height:100%;
     width:100%;
-    background:blue;
 
     display: flex;
     flex-direction:column;
@@ -68,8 +67,6 @@ a {
 .innerbody_wrapper {
     height:100%;
     width:85%;
-    
-    background:grey;
 
     display:inline;
 }
@@ -85,7 +82,7 @@ a {
     margin:15px;
 }
 
-#lb_line {
+.lb_line {
     background-color: black;
     height:1px;
     width: 90%;
