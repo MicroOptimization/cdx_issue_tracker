@@ -2,6 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/base_navbars.css') }}">
+<script src="https://kit.fontawesome.com/8b14f8f266.js" crossorigin="anonymous"></script>
 
     {% block innerhead %}
     {% endblock %}
@@ -13,12 +14,22 @@
 {% block body %}
 <div class="page_container">
     <div class="top_bar">
-        <label class="logo">LOGO</label>
-        
+        <a href="home"><label class="logo">LOGO</label></a>
+
+        <div class="top_middle">
+            <label class="logged_in_as">Logged in as "placeholder"</label>
+        </div>
+
+        <div class="top_right_corner">
+            <a>Options</a>
+            <a href="/"><i class="fa-solid fa-circle-user"></i></a>
+        </div>
     </div>
 
     <div class="hori_layout">
         <div class="left_bar">
+            <a href="home">Home</a>
+            <hr id="lb_line">
             <a>Tickets</a>
             <a>Projects</a>
             <a>Profile</a>

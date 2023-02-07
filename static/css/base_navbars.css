@@ -6,9 +6,12 @@ body {
     overflow: hidden;
 }
 
-
-
 a {
+    color: inherit;
+    text-decoration: None;
+}
+
+.left_bar a {
     display:block;
     font-size:50px;
 }
@@ -42,6 +45,7 @@ a {
 
     display:flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .hori_layout {
@@ -74,6 +78,9 @@ a {
     font-size:125px;
 }
 
+
+
+/*left bar children*/
 .left_bar a {
     margin:15px;
 }
@@ -82,4 +89,30 @@ a {
     background-color: black;
     height:1px;
     width: 90%;
+}
+
+.top_right_corner {
+    height:100%;
+    width:15%;
+    display: flex;
+    justify-content: space-between;
+    gap:45px;
+    margin-right:60px;
+    
+}
+/*the fontawesome profile icon*/
+.top_bar i, .top_bar a {
+    font-size:60px;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.top_middle {
+    display:flex;
+    align-items: center;
+    
+}
+
+.logged_in_as {
+    font-size:30px;
 }
