@@ -1,0 +1,23 @@
+{% extends 'base_navbars.html' %}
+
+{% block innerhead %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/all_tickets.css') }}">
+{% endblock %}
+
+
+{% block innerbody %}
+<div class="innerbody">
+    <div class="header_height">
+        <h2>All Tickets</h2>
+        <i class="fa-solid fa-sort"></i>
+    </div>
+
+    <div class="ticket_div">
+        <div class="ticket_card"><div class="project_name"><a href="/projects">Project Name</a></div> <div class="ticket_name"><a href="/home">Ticket Name Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</a></div></div>
+        <div class="ticket_card"><div class="project_name"><a href="/projects">Project Name Project Name Project Name</a></div> <div class="ticket_name"><a href="/home">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</a></div></div>
+        <div class="ticket_card"><div class="project_name"><a href="/projects">Prooooooooooooooooooooooject Name</a></div> <div class="ticket_name"><a href="/home">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</a></div></div>
+        <div class="ticket_card"><div class="project_name"><a href="/projects">Project Name</a></div> <div class="ticket_name"><a href="/home">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</a></div></div>
+        <div class="ticket_card"><div class="project_name"><label>Project Name</label></div> <div class="ticket_name"><label>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</label></div></div>
+    </div>
+</div>
+{% endblock %}

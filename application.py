@@ -14,5 +14,12 @@ def home():
 def projects():
     return render_template("projects.html")
 
+@application.route("/alltickets")
+def all_tickets():
+    return render_template("all_tickets.html")
+
+@application.route("/newproject")
+def add_project():
+    return render_template("add_project.html")
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)
