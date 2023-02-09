@@ -106,7 +106,7 @@ a {
 }
 /*the fontawesome profile icon*/
 .top_bar i, .top_bar a {
-    font-size:60px;
+    font-size:5vh;
     margin-top:auto;
     margin-bottom:auto;
 }
