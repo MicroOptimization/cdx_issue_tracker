@@ -7,7 +7,6 @@
 
     display:flex;
     flex-direction: column;
-    
     align-items:center;
     
     background-color: #4158D0;
@@ -51,15 +50,47 @@
     gap:1vw;
 }
 
+.project_div {
+    height:100%;
+    width:100%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.project_grid {
+    background-color:white;
+    
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;  
+    max-width:616px;
+    width: calc(100% - 20px);
+}
+
+.project_card {
+    background-color:blue;
+    /*border:solid 1px rgb(82, 79, 79);
+*/
+    height: 200px;
+    width: 200px;
+
+    display: flex;
+    justify-content: center; /*horizontal alignment*/
+    align-items: center; /*vertical alignment*/
+}
 
 
+/*
 .project_grid {
     width:80%;
     height:80%;
 
     display: inline-grid;
     grid-template-columns: auto auto auto auto auto;
-    /*background:black;*/
+    
     grid-gap: 5%;
 
     background-color:black;
@@ -86,4 +117,4 @@
 .project_cell * {
     display:block;
     background:red;
-}
+}*/
