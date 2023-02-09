@@ -69,10 +69,21 @@
     height:100%;
     width:100%;
     background:white;
+
 }
 
 .project_cell {
     height:100%;
     width:100%;
+    background:red;
+
+    white-space: nowrap;
+    max-width:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project_cell * {
+    display:block;
     background:red;
 }
