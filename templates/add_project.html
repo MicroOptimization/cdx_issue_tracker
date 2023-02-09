@@ -7,7 +7,40 @@
 
 {% block innerbody %}
 <div class="innerbody">
-    <h1>Create New Project</h1>
+    <div class="header_div">
+        <h1>Create a Project</h1>
+    </div>
     
+    <div class="creation_div">
+        <form>
+            <div class="top_half">
+                <div class="top_left">
+                    <label>Project Name</label>
+                    <input type="text">
+                    <label>Key</label>
+                    <input type="text">
+                </div>
+                <div class="top_right">
+                    <div>
+                        <label class="creation_message">
+                        Your key must be unique! <br><br>You may add numbers, letters, 
+                        and special characters. You cannot change the key after
+                        project creation. <br><br>The description is optional
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="description_div">
+                <label>Description</label>
+                <textarea rows="4" cols="50"></textarea>
+
+                <div class="buttons">
+                    <a href="/home">Cancel</a>
+                    <input type="submit" value="Create">
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

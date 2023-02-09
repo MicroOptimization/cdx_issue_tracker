@@ -3,10 +3,119 @@
     padding:0px;
 
     display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
 
     background: #ddd6f3; /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #ece9f7, #ee8e89); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #ece9f7, #ee8e89); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     height:100vh;
+}
+
+.header_div {
+    padding-top:10px;
+    height:10%; 
+}
+
+.creation_div {
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+
+    width:50%;
+    height:55%;
+    background-color:rgb(220, 220, 240, 0.9);;
+
+
+}
+.creation_div form {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:60%;
+    height:100%;
+}
+
+
+
+
+.top_half {
+    
+    margin-bottom:15px;
+    display:flex;
+    flex-direction:row;
+
+    height:40%;
+}
+
+.top_left {
+    display:flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items:flex-start;
+    
+    width:50%;
+    padding-top:15px;
+    
+}
+
+.top_left * {
+    margin-top: 15px;
+}
+
+.top_right {
+    padding-bottom:15px;
+
+    height:100%;
+    width:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    background:rgb(220, 220, 220, 0.9);
+}
+
+.top_right div {
+    width: 90%;
+    height: 90%;
+}
+
+
+.description_div {
+    display:flex;
+    flex-direction:column;
+    width: 100%;
+    height:40%;
+}
+
+.description_div * {
+    margin-top:15px;
+}
+
+.description_div textarea {
+    height:100%;
+    width:100%;
+}
+
+.buttons {
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+
+    gap:15px;
+}
+
+.buttons input {
+    font-size:15px;
+}
+
+.buttons a {
+    border: 1px solid black;
+
+    padding:2px;    
+    background-color:white;
 }

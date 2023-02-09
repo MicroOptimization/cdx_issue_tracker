@@ -70,12 +70,25 @@
     display:flex;
     justify-content: center;
     align-items:center;
+    
+    flex-direction:column;
     font-size:25px;
 }
 
-.welcomeback_label {
+.welcomeback_wrapper * {
     color: white;
+    margin:15px;
 }
+
+.welcomeback_wrapper a {
+    margin-bottom:0px;
+    font-size:20px;
+    /*background-color:rgb(220, 220, 220, 0.9);*/
+    padding: 15px;
+    background-color:rgb(220, 220, 220, 0.9);
+    color:black;
+}
+
 
 
 .new_ticket_div {
