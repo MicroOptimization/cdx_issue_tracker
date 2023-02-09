@@ -1,0 +1,78 @@
+.innerbody {
+    height:100%;
+    width:100%;
+
+    margin:0px;
+    padding:0px;
+
+    display:flex;
+    flex-direction: column;
+    
+    align-items:center;
+    
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+
+    background-color: #00DBDE;
+    background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+
+}
+
+.header_div {
+    width:95%;
+    height:15%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+/*
+    background-color:burlywood;*/
+}
+
+.header_div h2 {
+    font-size:5vh;
+    padding-bottom:10px;
+    border-bottom: 1.5px black solid;
+}
+
+.sort_div h3 {
+    font-size:3vh;
+}
+
+.sort_div i {
+    font-size:3vh;
+}
+
+.sort_div {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:1vw;
+}
+
+
+
+.project_grid {
+    width:80%;
+    height:80%;
+
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto auto;
+    /*background:black;*/
+    grid-gap: 5%;
+
+    background-color:black;
+}
+
+.project_cell_wrapper {
+    height:100%;
+    width:100%;
+    background:white;
+}
+
+.project_cell {
+    height:100%;
+    width:100%;
+    background:red;
+}
