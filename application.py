@@ -21,5 +21,10 @@ def all_tickets():
 @application.route("/newproject")
 def add_project():
     return render_template("add_project.html")
+
+@application.route("/project")
+def cur_project():
+    return render_template("project.html")
+
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

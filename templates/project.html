@@ -1,0 +1,37 @@
+{% extends 'base_navbars.html' %}
+
+
+
+{% block innerhead %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/project.css') }}">
+{% endblock %}
+
+
+
+{% block innerbody %}
+<div class="innerbody">
+    <div class="margin_div">
+        <div class="header_div">
+            <h1>"Project Name"</h1>
+
+            <a>Add Ticket</a>
+            <a href="/home">Add People</a>
+
+        </div>
+        <div class="minimize_div">
+            <button type="button">Minimize!</button>
+        </div>
+        <div class="desc_div">
+            <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</label>
+        </div>
+        <!--<div class="graph_div"></div>-->
+
+
+        <div class="todo_div">
+            <div class="todo_columns">
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
