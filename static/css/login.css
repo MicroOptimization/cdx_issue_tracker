@@ -59,13 +59,17 @@ form * {
 .login_container {
     height: 30%;
     width: 25%;
-    background:rgb(188, 195, 207, 0.8);
     
     display: flex;
     flex-direction:column;
     align-items:center;
+    
     border-radius:50px;
+    background:rgb(188, 195, 207, 0.8);
+    
 }
+
+
 
 .link_container {
     height:25%;
@@ -74,11 +78,41 @@ form * {
     flex-direction:column;
     align-items:center;
     gap:5px;
+    margin-top:15px;
 }
 
-#login_button {
+.login_button {
     width:25%;
     border-radius:7px;
     border-width:1px;
     
+}
+
+
+
+
+.login_divs {
+    height: 100%;
+    width: 100%;
+    
+    
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.create_acc_divs {
+    height: 100%;
+    width: 100%;
+    
+    
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    
+    display:none;
+}
+
+a {
+    cursor: pointer;
 }

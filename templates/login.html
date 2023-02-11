@@ -5,6 +5,19 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 
+<script>
+function toggle_create() {
+    if (document.getElementById("login_div").style.display == "none") {
+        document.getElementById("login_div").style.display = "flex";
+        document.getElementById("create_acc").style.display = "none";
+    } else {
+        
+        document.getElementById("login_div").style.display = "none";
+        document.getElementById("create_acc").style.display = "flex";
+    }
+}
+</script>
+
 {% endblock %}
 
 
@@ -12,19 +25,38 @@
 <div class="logo_div"><h1 class="logo">LOGO</h1></div>
 
 <div class="login_container">
-    <div class="header_div">
-        <i class="fa-solid fa-user user_icon"></i> 
-        <h2 class="login_header">Login</h2>
-    </div>
-    <form class="login_form">
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <input type="submit" value="Login" id="login_button">
-    </form>
+    <div class="login_divs" id="login_div">
+        <div class="header_div">
+            <i class="fa-solid fa-user user_icon"></i> 
+            <h2 class="login_header">Login</h2>
+        </div>
+        <form class="login_form">
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <input type="submit" value="Login" class="login_button">
+        </form>
 
-    <div class="link_container">
-        <a>Create account</a>
-        <a>Forgot password?</a>
+        <div class="link_container">
+            <a onclick="toggle_create()">Create account</a>
+            <a>Forgot password?</a>
+        </div>
+    </div>
+
+    <div class="create_acc_divs" id="create_acc">
+        <div class="header_div">
+            <i class="fa-solid fa-user user_icon"></i> 
+            <h2 class="login_header">Create an Account</h2>
+        </div>
+        <form class="login_form">
+            <input type="text" placeholder="Username">
+            <input type="text" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <input type="submit" value="Login" class="login_button">
+        </form>
+
+        <div class="link_container">
+            <a onclick="toggle_create()">Back</a>
+        </div>
     </div>
 </div>
 {% endblock %}
