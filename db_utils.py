@@ -28,33 +28,49 @@ class Db_helper:
 
     def create_user(self, username_input, password_input, email_input):
         with self.engine.connect() as conn:
-            passwd = password_input #password input for when you're making your password for the first time
-
-            #Do both of these for when you make a pw for the first time or reset your pw
-            salt = bcrypt.gensalt()
-            hashed = bcrypt.hashpw(passwd.encode('utf8'), salt)
-            #put hashed into your database under password
-            #print("salt: " , salt)
-            password_hash = hashed.decode('utf8') # decode the hash to prevent is encoded twice
-
-            stmt = insert(self.user_account).values(username=username_input, pword=password_hash, email=email_input)
+            stmt = select(self.user_account).where((self.user_account.c.username == username_input) or (self.user_account.c.email == email_input))
+            #problem statement^ Maybe we can just make two statements
+            #we're trying to prevent accounts being made that have existing usernames and emails in our database
 
             result = conn.execute(stmt)
-            conn.commit()
+            rd = result.mappings().all()
+            print(rd)
+            if len(rd) >= 1:
+                return False
+            else:
+                passwd = password_input #password input for when you're making your password for the first time
 
+                #Do both of these for when you make a pw for the first time or reset your pw
+                salt = bcrypt.gensalt()
+                hashed = bcrypt.hashpw(passwd.encode('utf8'), salt)
+                #put hashed into your database under password
+                password_hash = hashed.decode('utf8') # decode the hash to prevent is encoded twice
+
+                stmt = insert(self.user_account).values(username=username_input, pword=password_hash, email=email_input)
+
+                result = conn.execute(stmt)
+                conn.commit()
+                conn.close()
+                return True
+        
     def login(self, username_input, password_input):
         with self.engine.connect() as conn:
             stmt = select(self.user_account).where(self.user_account.c.username == username_input)
-            result = conn.execute(stmt)
-            rd = result.mappings().all()
             
-            correct_password = rd[0]["pword"]
+            
+            result = conn.execute(stmt)
+            conn.close()
 
-            bcrypt.checkpw(password_input.encode('utf8'), correct_password.encode('utf8'))
-            if bcrypt.checkpw(password_input.encode('utf8'), correct_password.encode('utf8')):
-                return True
-            else:
+            rd = result.mappings().all()
+            if len(rd) == 0:
+                #no username in db
                 return False
+            else:
+                correct_password = rd[0]["pword"]
+                if bcrypt.checkpw(password_input.encode('utf8'), correct_password.encode('utf8')):
+                    return True
+                else:
+                    return False
         return False
 
 #dbh = Db_helper()

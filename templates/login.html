@@ -10,9 +10,8 @@ function toggle_create() {
     if (document.getElementById("login_div").style.display == "none") {
         document.getElementById("login_div").style.display = "flex";
         document.getElementById("create_acc").style.display = "none";
-        document.getElementById("create_user_form").reset();
+        //document.getElementById("create_user_form").reset(); //This'll mess things up
     } else {
-        
         document.getElementById("login_div").style.display = "none";
         document.getElementById("create_acc").style.display = "flex";
         document.getElementById("login_input_form").reset();

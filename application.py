@@ -11,17 +11,22 @@ def main():
 
         create_info = (request.form.get('create_username'), request.form.get('create_password'), request.form.get('create_email'))
         create_info = list(filter(None, create_info))
-        dbh = Db_helper()
+        
+        dbh = Db_helper()     
         if len(login_info) == 2:
             print("logged in: " , dbh.login(login_info[0], login_info[1]))
             pass
         elif len(create_info) == 3:
-            dbh.create_user(create_info[0], create_info[1], create_info[2])
             print("creating account:")
+            if dbh.create_user(create_info[0], create_info[1], create_info[2]):
+                print("acc created successfully!")
+            else:
+                print("username or email taken!")
             pass
         
         return render_template("login.html")
     return render_template("login.html")
+
 
 @application.route("/home")
 def home():
