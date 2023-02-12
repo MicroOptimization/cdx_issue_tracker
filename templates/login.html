@@ -10,11 +10,17 @@ function toggle_create() {
     if (document.getElementById("login_div").style.display == "none") {
         document.getElementById("login_div").style.display = "flex";
         document.getElementById("create_acc").style.display = "none";
+        document.getElementById("create_user_form").reset();
     } else {
         
         document.getElementById("login_div").style.display = "none";
         document.getElementById("create_acc").style.display = "flex";
+        document.getElementById("login_input_form").reset();
     }
+}
+
+function show_created() {
+    document.getElementById("acc_made").style.visibility = "show";
 }
 </script>
 
@@ -30,12 +36,12 @@ function toggle_create() {
             <i class="fa-solid fa-user user_icon"></i> 
             <h2 class="login_header">Login</h2>
         </div>
-        <form class="login_form">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
+        <form class="login_form" method="POST" id="login_input_form">
+            <input type="text" placeholder="Username" name="login_username">
+            <input type="password" placeholder="Password" name="login_password">
             <input type="submit" value="Login" class="login_button">
         </form>
-
+        <label id="acc_made">Account Created Successfully</label>
         <div class="link_container">
             <a onclick="toggle_create()">Create account</a>
             <a>Forgot password?</a>
@@ -47,13 +53,13 @@ function toggle_create() {
             <i class="fa-solid fa-user user_icon"></i> 
             <h2 class="login_header">Create an Account</h2>
         </div>
-        <form class="login_form">
-            <input type="text" placeholder="Username">
-            <input type="text" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <input type="submit" value="Login" class="login_button">
+        <form class="login_form" id="create_user_form" method="POST">
+            <input type="text" placeholder="Username" name="create_username">
+            <input type="text" placeholder="Email" name="create_email">
+            <input type="password" placeholder="Password" name="create_password">
+            <input type="submit" value="Create" class="login_button" onclick="toggle_create()">
         </form>
-
+        
         <div class="link_container">
             <a onclick="toggle_create()">Back</a>
         </div>

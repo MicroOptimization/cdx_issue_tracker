@@ -116,3 +116,7 @@ form * {
 a {
     cursor: pointer;
 }
+
+#acc_made {
+    visibility: hidden;
+}

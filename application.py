@@ -1,9 +1,26 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from db_utils import Db_helper
 
 application = Flask(__name__)
 
-@application.route("/")
+@application.route("/", methods =["GET", "POST"])
 def main():
+    if request.method == "POST":
+        login_info = (request.form.get('login_username'), request.form.get('login_password'))
+        login_info = list(filter(None, login_info))
+
+        create_info = (request.form.get('create_username'), request.form.get('create_password'), request.form.get('create_email'))
+        create_info = list(filter(None, create_info))
+        dbh = Db_helper()
+        if len(login_info) == 2:
+            print("logged in: " , dbh.login(login_info[0], login_info[1]))
+            pass
+        elif len(create_info) == 3:
+            dbh.create_user(create_info[0], create_info[1], create_info[2])
+            print("creating account:")
+            pass
+        
+        return render_template("login.html")
     return render_template("login.html")
 
 @application.route("/home")
