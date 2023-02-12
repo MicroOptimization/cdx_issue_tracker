@@ -21,6 +21,7 @@ class Db_helper:
         self.user_account = Table(
             "user_account",
             metadata_obj,
+            Column("user_id", Integer),
             Column("username", String(30)),
             Column("pword", String),
             Column("email", String),
@@ -64,14 +65,15 @@ class Db_helper:
             rd = result.mappings().all()
             if len(rd) == 0:
                 #no username in db
-                return False
+                print("here")
+                return (False, None)
             else:
                 correct_password = rd[0]["pword"]
                 if bcrypt.checkpw(password_input.encode('utf8'), correct_password.encode('utf8')):
-                    return True
+                    return (True, rd[0])
                 else:
-                    return False
-        return False
+                    return (False, None)
+        return (False, None)
 
 #dbh = Db_helper()
 #dbh.create_user("1", "2", "1@gmail.com")
