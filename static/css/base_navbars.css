@@ -124,3 +124,9 @@ a {
 .home_btn, .profile_btn {
     border-bottom: 1px solid black;
 }
+
+#logout {
+    font-size:20px;
+    font-weight:bold;
+    
+}
