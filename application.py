@@ -50,7 +50,7 @@ def logout():
     application.secret_key = secrets.token_urlsafe(16) #so this resets the session
     return redirect("/")
 
-@application.route("/home", methods= ["POST", "GET"])
+@application.route("/home")
 def home():
     return render_template("home.html")
 

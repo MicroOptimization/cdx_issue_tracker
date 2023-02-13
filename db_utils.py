@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, URL, text, insert, Table, MetaData, Column, Integer, String, select
 import os
 import bcrypt
+import datetime
 
 class Db_helper:
     user_account = None
@@ -14,8 +15,8 @@ class Db_helper:
             host="localhost",
             database="not_jira",
         )
-
-        self.engine = create_engine(url_object)
+        self.engine = create_engine(url_object) #engines are a connection factory essentially, and we use connections to have our orm generate
+        #sql queries and use them on our sql database.
         
         metadata_obj = MetaData()
         self.user_account = Table(
@@ -41,6 +42,24 @@ class Db_helper:
             metadata_obj,
             Column("project_id", Integer),
             Column("user_id", Integer),
+        )
+
+        self.ticket = Table(
+            "ticket",
+            metadata_obj,
+            Column("ticket_id", Integer),
+            Column("title", String),
+            Column("description", String),
+            Column("date_created", String),
+            Column("date_completed", String),
+            Column("project_id", Integer),
+        )
+
+        self.tickets_users = Table(
+            "tickets_users",
+            metadata_obj,
+            Column("user_id", Integer),
+            Column("ticket_id", Integer),   
         )
 
     def create_user(self, username_input, password_input, email_input):
@@ -98,6 +117,9 @@ class Db_helper:
             #res.mappings().all() returns a list
             #res.mappings() returns a sqlalchemy.engine.result.MappingResult
             #res.mappings().all()[0] returns a sqlalchemy.engine.row.RowMapping
+            
+            conn.commit()#this is important because next we add our user to our project, and this commit makes it so our project exists in 
+            #our postgres db, and things will explode if we try to add our user to a project that doesn't exist yet.
 
             pid = temp["project_id"] #we need this to add an entry to our many to many table for users and projects
             self.add_user_to_project(uid, pid) #adds the person who made the project to the project
@@ -106,7 +128,6 @@ class Db_helper:
             conn.close()
             return True
         return False
-
     
     def add_user_to_project(self, uid, pid):
         with self.engine.connect() as conn:
@@ -144,7 +165,20 @@ class Db_helper:
             return info #this is a list of dictionaries, each dictionary represents a project row, where the keys are columns 
         return None
     
-
+    def create_ticket(self, pid, ticket_details):
+        with self.engine.connect() as conn:
+            stmt = insert(self.ticket).values(title=ticket_details["title"],description=ticket_details["description"], project_id=pid).returning(self.ticket.c.ticket_id)
+            res = conn.execute(stmt)
+            tid = res.mappings().all()[0]["ticket_id"]
+            print("tix id:" , tid)
+            conn.commit()
+            conn.close()
+            return True
+        return False
+    
+    def assign_ticket_to_user(self, uid, tid):
+        pass
+        return False    
 dbh = Db_helper()
 """
 pids = dbh.get_pids(24)
@@ -152,9 +186,17 @@ pids = dbh.get_pids(24)
 projects = dbh.get_project_info(pids)
 print(projects[0]["title"])
 """
-pids = dbh.get_pids(24)
-projects = dbh.get_project_info(pids)
-print(projects)
+"""
+ticket_details = {
+    "title": "Garou",
+    "description": "Donkey"
+    }
+dbh.create_ticket(3, ticket_details)
+"""
+#pids = dbh.get_pids(24)
+#projects = dbh.get_project_info(pids)
+#print(projects)
+
 #dbh.create_project(("many_many_test", "mmt", "we're gonna test our many to many relationships and connect this to spaghetti's account"), uid="24")
 
 #dbh.add_user_to_project(24, 2)
