@@ -27,6 +27,22 @@ class Db_helper:
             Column("email", String),
         )
 
+        self.project = Table(
+            "project",
+            metadata_obj,
+            Column("project_id", Integer),
+            Column("title", String),
+            Column("description", String),
+            Column("key_id", String),
+        )
+
+        self.projects_users = Table(
+            "projects_users",
+            metadata_obj,
+            Column("project_id", Integer),
+            Column("user_id", Integer),
+        )
+
     def create_user(self, username_input, password_input, email_input):
         with self.engine.connect() as conn:
             stmt = select(self.user_account).where((self.user_account.c.username == username_input) or (self.user_account.c.email == email_input))
@@ -74,8 +90,35 @@ class Db_helper:
                 else:
                     return (False, None)
         return (False, None)
+    
+    def create_project(self, project_details, uid):
+        with self.engine.connect() as conn:
+            stmt = insert(self.project).values(title=project_details[0], key_id=project_details[1], description=project_details[2]).returning(self.project.c.project_id)
+            res = conn.execute(stmt) #returns a sqlalchemy.engine.cursor.CursorResult object
+
+            
+
+
+            #<sqlalchemy.engine.cursor.CursorResult object at 0x000001FE8F83E4C0>
+            temp = res.mappings().all()[0]
+            #res.mappings().all() returns a list
+            #res.mappings() returns a sqlalchemy.engine.result.MappingResult
+            #res.mappings().all()[0] returns a sqlalchemy.engine.row.RowMapping
+
+            pid = temp["project_id"]
+
+            stmt = insert(self.projects_users).values(project_id=pid, user_id=uid)
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+            return True
+        return False
+
 
 #dbh = Db_helper()
+#dbh.create_project(("many_many_test", "mmt", "we're gonna test our many to many relationships and connect this to spaghetti's account"), uid="24")
+
+
 #dbh.create_user("1", "2", "1@gmail.com")
 
 #print(dbh.login("1", "4"))

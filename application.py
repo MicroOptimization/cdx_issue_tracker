@@ -8,7 +8,6 @@ application.secret_key = secrets.token_urlsafe(16)
 @application.context_processor
 def inject_user():
     return dict(username=session.get("username"))
-
         
 @application.route("/", methods =["GET", "POST"])
 def main():
@@ -55,17 +54,24 @@ def logout():
 def home():
     return render_template("home.html", username=session["username"])
 
-@application.route("/projects")
-def projects():
-    return render_template("projects.html")
-
 @application.route("/alltickets")
 def all_tickets():
     return render_template("all_tickets.html")
 
-@application.route("/newproject")
+@application.route("/newproject", methods=["GET", "POST"])
 def add_project():
+    if request.method == "POST":
+        project_details = (request.form.get("pinput"), request.form.get("kinput"), request.form.get("dinput"))
+        dbh = Db_helper()
+        print(session)
+        print("sid: " , session["user_id"])
+        res = dbh.create_project(project_details, session["user_id"])
+        pass
     return render_template("add_project.html")
+
+@application.route("/projects")
+def projects():
+    return render_template("projects.html")
 
 @application.route("/project")
 def cur_project():
