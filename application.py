@@ -64,12 +64,16 @@ def add_project():
         project_details = (request.form.get("pinput"), request.form.get("kinput"), request.form.get("dinput"))
         dbh = Db_helper()
         res = dbh.create_project(project_details, session["user_id"])
+        #maybe return a render template for the project page that you just made
         pass
     return render_template("add_project.html")
 
 @application.route("/projects")
 def projects():
-    return render_template("projects.html")
+    dbh = Db_helper()
+    pids = dbh.get_pids(session["user_id"])
+    pinfo = dbh.get_project_info(pids)
+    return render_template("projects.html", project_info=pinfo)
 
 @application.route("/project")
 def cur_project():

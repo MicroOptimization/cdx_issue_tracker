@@ -138,17 +138,23 @@ class Db_helper:
             for c_pid in pids:
                 stmt = select(self.project).where(self.project.c.project_id == c_pid) #getting the 
                 res = conn.execute(stmt)
-                row = res.mappings().all() #the row that matches the current id we have
-                info.append(row)
+                row = res.mappings().all() #(this is a list of all rows that match our select)
+                info.append(row[0])
             return info
         return None
-dbh = Db_helper()
-#dbh.create_project(("many_many_test", "mmt", "we're gonna test our many to many relationships and connect this to spaghetti's account"), uid="24")
+    
 
+dbh = Db_helper()
+"""
 pids = dbh.get_pids(24)
 
-#print(dbh.get_project_info(pids))
-#dbh.add_user_to_project(39, 37)
+projects = dbh.get_project_info(pids)
+print(projects[0]["title"])
+"""
+
+#dbh.create_project(("many_many_test", "mmt", "we're gonna test our many to many relationships and connect this to spaghetti's account"), uid="24")
+
+dbh.add_user_to_project(24, 2)
 
 #dbh.create_user("1", "2", "1@gmail.com")
 
