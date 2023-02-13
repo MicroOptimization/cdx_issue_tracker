@@ -170,7 +170,7 @@ class Db_helper:
             stmt = insert(self.ticket).values(title=ticket_details["title"],description=ticket_details["description"], project_id=pid).returning(self.ticket.c.ticket_id)
             res = conn.execute(stmt)
             tid = res.mappings().all()[0]["ticket_id"]
-            print("tix id:" , tid)
+            
             conn.commit()
             conn.close()
             return True

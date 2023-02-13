@@ -88,5 +88,10 @@ def cur_project(pid):
         return render_template("project.html", project=project_info[0])
     return render_template("project.html")
 
+@application.route("/newticket/<int:pid>", methods=["POST", "GET"])
+def add_ticket(pid):
+    return render_template("add_ticket.html")
+
+
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

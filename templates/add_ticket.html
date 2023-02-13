@@ -1,0 +1,26 @@
+{% extends 'base_navbars.html' %}
+
+{% block innerhead %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_ticket.css')}}">
+
+{% endblock %}
+
+{% block innerbody %}
+<div class="innerbody">
+    <div class="everything">
+        <div class="header_div">
+            <h3>Create a ticket for project: "project name"</h3>
+        </div>
+        <div class="form_div">
+            <form id="new_ticket_form" method="POST">
+
+                <label>Ticket Name</label>
+                <input type="text" placeholder="Ticket Name" name="pinput">
+                <label>Description:</label>
+                <textarea rows="4" cols="50" name="dinput"></textarea>
+                <input type="submit" value="create">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

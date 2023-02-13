@@ -1,0 +1,30 @@
+.innerbody {
+    width:100%;
+    height:100%;
+    background-color:aquamarine;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.everything {
+    width:50%;
+    height:80%;
+    background-color:beige;
+
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    flex-direction:column;
+}
+
+#new_ticket_form {
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    flex-direction:column;
+}
