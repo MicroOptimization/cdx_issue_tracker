@@ -63,8 +63,6 @@ def add_project():
     if request.method == "POST":
         project_details = (request.form.get("pinput"), request.form.get("kinput"), request.form.get("dinput"))
         dbh = Db_helper()
-        print(session)
-        print("sid: " , session["user_id"])
         res = dbh.create_project(project_details, session["user_id"])
         pass
     return render_template("add_project.html")

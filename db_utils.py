@@ -51,7 +51,6 @@ class Db_helper:
 
             result = conn.execute(stmt)
             rd = result.mappings().all()
-            print(rd)
             if len(rd) >= 1:
                 return False
             else:
@@ -74,7 +73,6 @@ class Db_helper:
         with self.engine.connect() as conn:
             stmt = select(self.user_account).where(self.user_account.c.username == username_input)
             
-            
             result = conn.execute(stmt)
             conn.close()
 
@@ -96,28 +94,61 @@ class Db_helper:
             stmt = insert(self.project).values(title=project_details[0], key_id=project_details[1], description=project_details[2]).returning(self.project.c.project_id)
             res = conn.execute(stmt) #returns a sqlalchemy.engine.cursor.CursorResult object
 
-            
-
-
-            #<sqlalchemy.engine.cursor.CursorResult object at 0x000001FE8F83E4C0>
             temp = res.mappings().all()[0]
             #res.mappings().all() returns a list
             #res.mappings() returns a sqlalchemy.engine.result.MappingResult
             #res.mappings().all()[0] returns a sqlalchemy.engine.row.RowMapping
 
-            pid = temp["project_id"]
+            pid = temp["project_id"] #we need this to add an entry to our many to many table for users and projects
+            self.add_user_to_project(uid, pid) #adds the person who made the project to the project
 
-            stmt = insert(self.projects_users).values(project_id=pid, user_id=uid)
-            conn.execute(stmt)
             conn.commit()
             conn.close()
             return True
         return False
 
+    
+    def add_user_to_project(self, uid, pid):
+        with self.engine.connect() as conn:
+            stmt = insert(self.projects_users).values(project_id=pid, user_id=uid)
+            conn.execute(stmt)
 
-#dbh = Db_helper()
+            conn.commit()
+            conn.close()
+            return True
+        return False
+
+    def get_pids(self, uid):
+        with self.engine.connect() as conn:
+            stmt = select(self.projects_users).where(self.projects_users.c.user_id == uid)
+            res = conn.execute(stmt)
+            projects = res.mappings().all()
+
+            pids = []
+            for relationship in projects:
+                pids.append(relationship["project_id"])
+            conn.close()
+            return pids #returning a list of all the project IDs
+        return None
+
+    def get_project_info(self, pids):
+        #pids is a list of all the ids that are associated with a given user
+        info = []
+        with self.engine.connect() as conn:
+            for c_pid in pids:
+                stmt = select(self.project).where(self.project.c.project_id == c_pid) #getting the 
+                res = conn.execute(stmt)
+                row = res.mappings().all() #the row that matches the current id we have
+                info.append(row)
+            return info
+        return None
+dbh = Db_helper()
 #dbh.create_project(("many_many_test", "mmt", "we're gonna test our many to many relationships and connect this to spaghetti's account"), uid="24")
 
+pids = dbh.get_pids(24)
+
+#print(dbh.get_project_info(pids))
+#dbh.add_user_to_project(39, 37)
 
 #dbh.create_user("1", "2", "1@gmail.com")
 
