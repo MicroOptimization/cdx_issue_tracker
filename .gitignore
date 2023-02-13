@@ -1,1 +1,6 @@
 env3
+__pycache__/
+
+
+bcrypt_pw_gen.py
+temp.py

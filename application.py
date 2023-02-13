@@ -73,10 +73,20 @@ def projects():
     dbh = Db_helper()
     pids = dbh.get_pids(session["user_id"])
     pinfo = dbh.get_project_info(pids)
+
+    #let jinja use variables in the parameters of render_template for example we created the variable 
+    #"project_info" that'll be used later in our html by jinja
     return render_template("projects.html", project_info=pinfo)
 
-@application.route("/project")
-def cur_project():
+@application.route("/project/<int:pid>", methods=["POST", "GET"])
+def cur_project(pid):
+    
+    if request.method == "GET":
+        print(pid)
+        dbh = Db_helper()
+        project_info = dbh.get_project_info([pid])
+        return render_template("project.html", project=project_info)
+        pass
     return render_template("project.html")
 
 if __name__ == "__main__":

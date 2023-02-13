@@ -154,7 +154,7 @@ print(projects[0]["title"])
 
 #dbh.create_project(("many_many_test", "mmt", "we're gonna test our many to many relationships and connect this to spaghetti's account"), uid="24")
 
-dbh.add_user_to_project(24, 2)
+#dbh.add_user_to_project(24, 2)
 
 #dbh.create_user("1", "2", "1@gmail.com")
 

@@ -38,38 +38,12 @@
             </div></div></a>
 
             {% for project in project_info %}
-            <a class="project_anchor" href="/"><div class="project_card"><div class="project_cell">
+            <a class="project_anchor" href="/project/{{ project['project_id'] }}"><div class="project_card"><div class="project_cell">
                 <label class="project_name">{{ project["title"] }}</label>
                 <p>{{ project["description"] }}</p>
             </div></div></a>
             {% endfor %}
-
-            <!--
-            <a class="project_anchor" href="/"><div class="project_card"><div class="project_cell">
-                <label class="project_name">Project Name</label>
-                <p>Lorem Ipsum is simply dummy text of the printing 
-                and typesetting industry. Lorem Ipsum has been the 
-                industry's standard dummy text ever since the
-                1500s, when an unknown printer took a galley of type 
-                and scrambled it to make a type specimen book. It has 
-                survived not only five centuries, but also the leap 
-                into electronic typesetting, remaining</p>
-            </div></div></a>
-            <div class="project_card"><div class="project_cell"><label class="project_name">Project Name</label></div></div>
-            <div class="project_card"><div class="project_cell"><label class="project_name">project name</label></div></div>
-            <div class="project_card"><div class="project_cell">project name</div></div>
-            <div class="project_card"><div class="project_cell">project name</div></div>
-            
-            <div class="project_card"><div class="project_cell">project name</div></div>
-            <div class="project_card"><div class="project_cell">project name</div></div>
-            <div class="project_card"><div class="project_cell">project name</div></div>
-            <div class="project_card"><div class="project_cell">project name</div></div>
-            <div class="project_card"><div class="project_cell">project name</div></div>
-            
-            <div class="project_card"><div class="project_cell">project name</div></div>
-            <div class="project_card"><div class="project_cell">project name</div></div>-->
         </div>       
-        
     </div>
 </div>
 {% endblock %}
