@@ -52,7 +52,7 @@ def logout():
 
 @application.route("/home", methods= ["POST", "GET"])
 def home():
-    return render_template("home.html", username=session["username"])
+    return render_template("home.html")
 
 @application.route("/alltickets")
 def all_tickets():
@@ -82,11 +82,10 @@ def projects():
 def cur_project(pid):
     
     if request.method == "GET":
-        print(pid)
         dbh = Db_helper()
         project_info = dbh.get_project_info([pid])
-        return render_template("project.html", project=project_info)
-        pass
+
+        return render_template("project.html", project=project_info[0])
     return render_template("project.html")
 
 if __name__ == "__main__":

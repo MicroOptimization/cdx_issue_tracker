@@ -132,15 +132,16 @@ class Db_helper:
         return None
 
     def get_project_info(self, pids):
-        #pids is a list of all the ids that are associated with a given user
+        #pids is a list of project IDs
         info = []
         with self.engine.connect() as conn:
             for c_pid in pids:
+                #c_pid = current project id
                 stmt = select(self.project).where(self.project.c.project_id == c_pid) #getting the 
                 res = conn.execute(stmt)
-                row = res.mappings().all() #(this is a list of all rows that match our select)
+                row = res.mappings().all() #(this is a list of all rows that match our select project id)
                 info.append(row[0])
-            return info
+            return info #this is a list of dictionaries, each dictionary represents a project row, where the keys are columns 
         return None
     
 
@@ -151,7 +152,9 @@ pids = dbh.get_pids(24)
 projects = dbh.get_project_info(pids)
 print(projects[0]["title"])
 """
-
+pids = dbh.get_pids(24)
+projects = dbh.get_project_info(pids)
+print(projects)
 #dbh.create_project(("many_many_test", "mmt", "we're gonna test our many to many relationships and connect this to spaghetti's account"), uid="24")
 
 #dbh.add_user_to_project(24, 2)
