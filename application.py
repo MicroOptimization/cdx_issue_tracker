@@ -56,7 +56,9 @@ def home():
 
 @application.route("/alltickets")
 def all_tickets():
-    return render_template("all_tickets.html")
+    dbh = Db_helper()
+    tickets = dbh.get_user_tickets(session["user_id"])
+    return render_template("all_tickets.html", tickets=tickets)
 
 @application.route("/newproject", methods=["GET", "POST"])
 def add_project():
@@ -91,12 +93,13 @@ def cur_project(pid):
 @application.route("/newticket/<int:pid>", methods=["POST", "GET"])
 def add_ticket(pid):
     if request.method == "POST":
+        dbh = Db_helper()
+        project_name = dbh.get_project_title_from_id(pid)
         ticket_info = {
             "title" : request.form.get("ninput"), 
-            "description" : request.form.get("dinput")
+            "description" : request.form.get("dinput"),
+            "project_title" : project_name
         }
-        #print(ticket_info)
-        dbh = Db_helper()
         dbh.create_ticket(pid, ticket_info)
         pass
     return render_template("add_ticket.html")

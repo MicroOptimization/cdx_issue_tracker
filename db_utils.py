@@ -53,6 +53,7 @@ class Db_helper:
             Column("date_created", String),
             Column("date_completed", String),
             Column("project_id", Integer),
+            Column("project_title", String),
         )
 
         self.tickets_users = Table(
@@ -139,6 +140,15 @@ class Db_helper:
             return True
         return False
 
+    def get_project_title_from_id(self, pid):
+        with self.engine.connect() as conn:
+            stmt = select(self.project).where(self.project.c.project_id == pid)
+            res = conn.execute(stmt)
+            project_name = res.mappings().all()[0] #every row that satisfies our query
+            conn.close()
+            return project_name["title"]
+        return None
+
     def get_pids(self, uid):
         with self.engine.connect() as conn:
             stmt = select(self.projects_users).where(self.projects_users.c.user_id == uid)
@@ -162,24 +172,59 @@ class Db_helper:
                 res = conn.execute(stmt)
                 row = res.mappings().all() #(this is a list of all rows that match our select project id)
                 info.append(row[0])
+            conn.close()
             return info #this is a list of dictionaries, each dictionary represents a project row, where the keys are columns 
         return None
     
     def create_ticket(self, pid, ticket_details):
         with self.engine.connect() as conn:
-            stmt = insert(self.ticket).values(title=ticket_details["title"],description=ticket_details["description"], project_id=pid).returning(self.ticket.c.ticket_id)
+            stmt = insert(self.ticket).values(
+                title=ticket_details["title"],
+                description=ticket_details["description"], 
+                project_id=pid, 
+                project_title=ticket_details["project_title"]
+            ).returning(self.ticket.c.ticket_id)
+
             res = conn.execute(stmt)
-            tid = res.mappings().all()[0]["ticket_id"]
-            
+            tid = res.mappings().all()[0]["ticket_id"] #useful once we decide 
+
             conn.commit()
             conn.close()
             return True
         return False
     
+    def get_user_tickets(self, uid):
+        
+        with self.engine.connect() as conn:
+            stmt = select(self.tickets_users).where(self.tickets_users.c.user_id == uid) #gets user_ticket pairs
+            res = conn.execute(stmt)
+            rows = res.mappings().all() #user-ticket pairs
+
+            tickets = []
+            for row in rows: #populates list tickets by going through each u/t pair and getting the corresponding ticket 
+                tid = row["ticket_id"] 
+                stmt = select(self.ticket).where(self.ticket.c.ticket_id == tid)
+                res2 = conn.execute(stmt)
+                rows2 = res2.mappings().all() #dict of the current row of tid 
+                tickets.append(rows2)
+
+            conn.close()
+
+            return tickets #list of ticket data rows (each row is a dict with columns as keys)
+        return None
+
     def assign_ticket_to_user(self, uid, tid):
         pass
         return False    
 dbh = Db_helper()
+
+#print(dbh.get_project_title_from_id(3))
+
+
+#3 is blue lock's project_id
+#24 is spaghetti's user_id
+
+#print(dbh.get_user_tickets(24)) 
 """
 pids = dbh.get_pids(24)
 
