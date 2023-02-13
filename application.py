@@ -90,6 +90,15 @@ def cur_project(pid):
 
 @application.route("/newticket/<int:pid>", methods=["POST", "GET"])
 def add_ticket(pid):
+    if request.method == "POST":
+        ticket_info = {
+            "title" : request.form.get("ninput"), 
+            "description" : request.form.get("dinput")
+        }
+        #print(ticket_info)
+        dbh = Db_helper()
+        dbh.create_ticket(pid, ticket_info)
+        pass
     return render_template("add_ticket.html")
 
 
