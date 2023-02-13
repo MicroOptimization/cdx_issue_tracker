@@ -9,7 +9,7 @@ application.secret_key = secrets.token_urlsafe(16)
 def inject_user():
     return dict(username=session.get("username"))
         
-@application.route("/", methods =["GET", "POST"])
+@application.route("/", methods =["GET", "POST"]) #the login page
 def main():
     if request.method == "POST":
         login_info = (request.form.get('login_username'), request.form.get('login_password'))
