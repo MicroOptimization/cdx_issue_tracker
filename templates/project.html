@@ -36,7 +36,7 @@
                     </div>
                     <div class="tickets">
                         {% for ticket in tickets[col["col_id"]] %}
-                        <div class="ticket_div">{{ ticket["ticket_title"] }}</div>
+                            <div class="ticket_div">{{ ticket["ticket_title"] }}</div>
                         {% endfor %}
                         <div class="ticket_div add_ticket"><a href="/projects" id="add_ticket_btn">Add a ticket</a></div>
                     </div>

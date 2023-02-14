@@ -92,7 +92,7 @@ def cur_project(pid):
             #print(type(col["col_id"]))
             cur_col_tickets = dbh.get_tickets_from_col(col["col_id"])
             tickets[col["col_id"]] = cur_col_tickets
-        print("tix: " , tickets)
+        #print("tix: " , tickets)
         return render_template("project.html", project=project_info[0], cols=cols, tickets=tickets)
     return render_template("project.html")
 
@@ -107,7 +107,8 @@ def add_ticket(pid):
             "project_title" : project_name
         }
         dbh.create_ticket(pid, ticket_info)
-        pass
+        cur_project_url = "/project/" + str(pid) #redirects you to the project that you added a ticket to after you submit your ticket 
+        return redirect(cur_project_url) 
     return render_template("add_ticket.html")
 
 
