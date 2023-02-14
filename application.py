@@ -86,8 +86,14 @@ def cur_project(pid):
     if request.method == "GET":
         dbh = Db_helper()
         project_info = dbh.get_project_info([pid])
-
-        return render_template("project.html", project=project_info[0])
+        cols = dbh.get_cols(pid)
+        tickets = {}
+        for col in cols:
+            #print(type(col["col_id"]))
+            cur_col_tickets = dbh.get_tickets_from_col(col["col_id"])
+            tickets[col["col_id"]] = cur_col_tickets
+        print("tix: " , tickets)
+        return render_template("project.html", project=project_info[0], cols=cols, tickets=tickets)
     return render_template("project.html")
 
 @application.route("/newticket/<int:pid>", methods=["POST", "GET"])

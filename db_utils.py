@@ -54,6 +54,7 @@ class Db_helper:
             Column("date_completed", String),
             Column("project_id", Integer),
             Column("project_title", String),
+            Column("col_id", Integer),
         )
 
         self.tickets_users = Table(
@@ -61,6 +62,14 @@ class Db_helper:
             metadata_obj,
             Column("user_id", Integer),
             Column("ticket_id", Integer),   
+        )
+
+        self.col = Table(
+            "col",
+            metadata_obj,
+            Column("col_id", Integer),
+            Column("col_title", String),
+            Column("project_id", Integer),    
         )
 
     def create_user(self, username_input, password_input, email_input):
@@ -140,15 +149,6 @@ class Db_helper:
             return True
         return False
 
-    def get_project_title_from_id(self, pid):
-        with self.engine.connect() as conn:
-            stmt = select(self.project).where(self.project.c.project_id == pid)
-            res = conn.execute(stmt)
-            project_name = res.mappings().all()[0] #every row that satisfies our query
-            conn.close()
-            return project_name["title"]
-        return None
-
     def get_pids(self, uid):
         with self.engine.connect() as conn:
             stmt = select(self.projects_users).where(self.projects_users.c.user_id == uid)
@@ -216,10 +216,37 @@ class Db_helper:
     def assign_ticket_to_user(self, uid, tid):
         pass
         return False    
+
+    def get_project_title_from_id(self, pid):
+        with self.engine.connect() as conn:
+            stmt = select(self.project).where(self.project.c.project_id == pid)
+            res = conn.execute(stmt)
+            project_name = res.mappings().all()[0] #every row that satisfies our query
+            conn.close()
+            return project_name["title"]
+        return None
+
+    def get_cols(self, pid):
+        with self.engine.connect() as conn:
+            stmt = select(self.col).where(self.col.c.project_id == pid)
+            res = conn.execute(stmt)
+            rows = res.mappings().all()
+            conn.close()
+            return rows #list of every column row in our project
+        
+    def get_tickets_from_col(self, cid):
+        with self.engine.connect() as conn:
+            stmt = select(self.ticket).where(self.ticket.c.col_id == cid)
+            res = conn.execute(stmt)
+            rows = res.mappings().all()
+            conn.close()
+            return rows    
 dbh = Db_helper()
 
-#print(dbh.get_project_title_from_id(3))
+#print(dbh.get_tickets_from_col(1))
 
+#print(dbh.get_project_title_from_id(3))
+#print(dbh.get_cols(3))
 
 #3 is blue lock's project_id
 #24 is spaghetti's user_id

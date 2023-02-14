@@ -29,6 +29,20 @@
 
         <div class="todo_div">
             <div class="todo_columns">
+                {% for col in cols %}
+                <div class="col">
+                    <div class="col_heading_div">
+                        <label class="col_heading"><b>{{ col["col_title"] }}</b></label>
+                    </div>
+                    <div class="tickets">
+                        {% for ticket in tickets[col["col_id"]] %}
+                        <div class="ticket_div">{{ ticket["ticket_title"] }}</div>
+                        {% endfor %}
+                        <div class="ticket_div add_ticket"><a href="/projects" id="add_ticket_btn">Add a ticket</a></div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!--
                 <div class="col">
                     <div class="col_heading_div">
                         <label class="col_heading"><b>Col Name</b></label>
@@ -60,8 +74,9 @@
                     </div>
 
                 </div>
-                <div class="col"></div>
-                <button class="add_col_btn" type="button"><i class="fa-solid fa-square-plus"></i></button>
+                <div class="col"></div>-->
+
+                <button class="add_col_btn" type="button"><i class="fa-solid fa-square-plus"></i></button> <!-- can only list 4 cols for now (including button)-->
             </div>
         </div>
     </div>
