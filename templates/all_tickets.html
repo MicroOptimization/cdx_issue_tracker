@@ -14,7 +14,7 @@
 
     <div class="ticket_div">
         {% for ticket in tickets %}
-        <div class="ticket_card"><div class="project_name"><a href="/project/{{ ticket[0]['project_id'] }}">{{ ticket[0]["project_title"] }}</a></div> <div class="ticket_name"><a href="/home">{{ ticket[0]["title"] }}</a></div></div>
+        <div class="ticket_card"><div class="project_name"><a href="/project/{{ ticket[0]['project_id'] }}">{{ ticket[0]["project_title"] }}</a></div> <div class="ticket_name"><a href="/ticket/{{ ticket[0]['ticket_id'] }}">{{ ticket[0]["title"] }}</a></div></div>
         {% endfor %}
         <!--
         <div class="ticket_card"><div class="project_name"><a href="/projects">Project Name</a></div> <div class="ticket_name"><a href="/home">Ticket Name Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</a></div></div>

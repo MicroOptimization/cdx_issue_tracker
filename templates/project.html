@@ -14,7 +14,6 @@
         <div class="header_div">
             <h1>{{ project["title"] }}</h1>
 
-            <a href="/newticket/{{ project['project_id'] }}">Add Ticket</a>
             <a href="/home">Add People</a>
             <a href="/home">Manage Members</a>
         </div>
@@ -36,9 +35,9 @@
                     </div>
                     <div class="tickets">
                         {% for ticket in tickets[col["col_id"]] %}
-                            <div class="ticket_div">{{ ticket["ticket_title"] }}</div>
+                            <div class="ticket_div"><a href="/ticket/{{ticket['ticket_id']}}" class="ticket_info_btn">{{ ticket["ticket_title"] }}</a></div>
                         {% endfor %}
-                        <div class="ticket_div add_ticket"><a href="/projects" id="add_ticket_btn">Add a ticket</a></div>
+                        <div class="ticket_div add_ticket"><a class="add_ticket_btn" href="/newticket/{{ project['project_id'] }}/{{ col['col_id'] }}">Add a ticket</a></div>
                     </div>
                 </div>
                 {% endfor %}

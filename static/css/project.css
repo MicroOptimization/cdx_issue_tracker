@@ -155,7 +155,13 @@
     background-color: rgb(245, 245, 245);
 }
 
-#add_ticket_btn {
+.add_ticket_btn {
+    display:block;
+    height:100%;
+    width:100%;
+}
+
+.ticket_info_btn {
     display:block;
     height:100%;
     width:100%;

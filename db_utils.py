@@ -182,7 +182,8 @@ class Db_helper:
                 title=ticket_details["title"],
                 description=ticket_details["description"], 
                 project_id=pid, 
-                project_title=ticket_details["project_title"]
+                project_title=ticket_details["project_title"],
+                col_id=ticket_details["col_id"]
             ).returning(self.ticket.c.ticket_id)
 
             res = conn.execute(stmt)
@@ -241,6 +242,14 @@ class Db_helper:
             rows = res.mappings().all()
             conn.close()
             return rows    
+
+    def get_ticket_info_by_id(self, tid):
+        with self.engine.connect() as conn:
+            stmt = select(self.ticket).where(self.ticket.c.ticket_id == tid)
+            res = conn.execute(stmt)
+            conn.close()
+            return res.mappings().all()[0]
+        
 dbh = Db_helper()
 
 #print(dbh.get_tickets_from_col(1))

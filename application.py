@@ -96,21 +96,31 @@ def cur_project(pid):
         return render_template("project.html", project=project_info[0], cols=cols, tickets=tickets)
     return render_template("project.html")
 
-@application.route("/newticket/<int:pid>", methods=["POST", "GET"])
-def add_ticket(pid):
+@application.route("/newticket/<int:pid>/<int:cid>", methods=["POST", "GET"])
+def add_ticket(pid, cid):
     if request.method == "POST":
+        print("col id: " , cid)
+        print("proj id: " , pid)
+
         dbh = Db_helper()
         project_name = dbh.get_project_title_from_id(pid)
         ticket_info = {
             "title" : request.form.get("ninput"), 
             "description" : request.form.get("dinput"),
-            "project_title" : project_name
+            "project_title" : project_name,
+            "col_id": cid
         }
         dbh.create_ticket(pid, ticket_info)
         cur_project_url = "/project/" + str(pid) #redirects you to the project that you added a ticket to after you submit your ticket 
         return redirect(cur_project_url) 
     return render_template("add_ticket.html")
 
+@application.route("/ticket/<int:tid>")
+def ticket(tid):
+    dbh = Db_helper()
+    tinfo = dbh.get_ticket_info_by_id(tid)
+    #print("tinfo: " , tinfo)
+    return render_template("ticket.html", ticket_info = tinfo)
 
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

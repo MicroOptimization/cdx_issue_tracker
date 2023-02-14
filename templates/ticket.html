@@ -1,0 +1,32 @@
+{% extends 'base_navbars.html' %}
+
+{% block innerhead %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ticket.css') }}">
+{% endblock %}
+
+{% block innerbody %}
+<div class="innerbody">
+    <div class="everything">
+        <div class="navbar_div">
+            <div class="header_div">
+                <h1 class="ticket_name">{{ ticket_info["ticket_title"] }}</h1>
+                <label class="project_name"><a href="/project/{{ ticket_info['project_id'] }}">{{ ticket_info["project_title"] }}</a></label>
+            </div>
+            <div class="timestamp_div">
+                <label>{{ ticket_info["date_created"] }}</label>
+                <label>-</label>
+                <label>{{ ticket_info["date_completed"] }}</label>
+            </div>
+            <div class="desc_div">
+            <p class="desc">{{ ticket_info["description"] }}</p>
+            </div>
+        </div>
+        <div class="navbar">
+            <a>resolve</a>
+            <a>assign</a>
+            <a>delete</a>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
