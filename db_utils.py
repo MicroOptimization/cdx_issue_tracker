@@ -250,7 +250,7 @@ class Db_helper:
             conn.close()
             return res.mappings().all()[0]
         
-dbh = Db_helper()
+#dbh = Db_helper()
 
 #print(dbh.get_tickets_from_col(1))
 
@@ -260,30 +260,3 @@ dbh = Db_helper()
 #3 is blue lock's project_id
 #24 is spaghetti's user_id
 
-#print(dbh.get_user_tickets(24)) 
-"""
-pids = dbh.get_pids(24)
-
-projects = dbh.get_project_info(pids)
-print(projects[0]["title"])
-"""
-"""
-ticket_details = {
-    "title": "Garou",
-    "description": "Donkey"
-    }
-dbh.create_ticket(3, ticket_details)
-"""
-#pids = dbh.get_pids(24)
-#projects = dbh.get_project_info(pids)
-#print(projects)
-
-#dbh.create_project(("many_many_test", "mmt", "we're gonna test our many to many relationships and connect this to spaghetti's account"), uid="24")
-
-#dbh.add_user_to_project(24, 2)
-
-#dbh.create_user("1", "2", "1@gmail.com")
-
-#print(dbh.login("1", "4"))
-
-#dbh.create_user("bearsley", "grizz", "bzl@gmail.com")
