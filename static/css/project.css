@@ -149,6 +149,15 @@
 
     
     overflow:hidden;
+    display:flex;
+    flex-direction:row;
+}
+
+.ticket_info_btn {
+    display:block;
+    height:100%;
+    width:80%;
+    background-color:red;
 }
 
 .add_ticket {
@@ -161,8 +170,3 @@
     width:100%;
 }
 
-.ticket_info_btn {
-    display:block;
-    height:100%;
-    width:100%;
-}

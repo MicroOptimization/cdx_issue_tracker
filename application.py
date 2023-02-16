@@ -82,19 +82,26 @@ def projects():
 
 @application.route("/project/<int:pid>", methods=["POST", "GET"])
 def cur_project(pid):
-    
     if request.method == "GET":
         dbh = Db_helper()
         project_info = dbh.get_project_info([pid])
         cols = dbh.get_cols(pid)
         tickets = {}
         for col in cols:
-            #print(type(col["col_id"]))
             cur_col_tickets = dbh.get_tickets_from_col(col["col_id"])
             tickets[col["col_id"]] = cur_col_tickets
-        #print("tix: " , tickets)
         return render_template("project.html", project=project_info[0], cols=cols, tickets=tickets)
+    #elif request.method == "POST":
+    #    print(request.form['delete_ticket'])
     return render_template("project.html")
+
+@application.route("/deleteticket/<int:pid>", methods= ["POST", "GET"])
+def delete_ticket(pid):
+    delete_me_id = request.form.get("ticket_id")
+    dbh = Db_helper()
+    dbh.remove_ticket(delete_me_id)
+    
+    return redirect("/project/" + str(pid))
 
 @application.route("/newticket/<int:pid>/<int:cid>", methods=["POST", "GET"])
 def add_ticket(pid, cid):
