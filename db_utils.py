@@ -268,7 +268,25 @@ class Db_helper:
             conn.commit()
             conn.close()
 
+    def remove_project(self, pid):
+        with self.engine.connect() as conn:
+            self.remove_project_relationships(pid)
+            stmt = delete(self.project).where(self.project.c.project_id == pid)
+            conn.execute(stmt)
+            
+            conn.commit()
+            conn.close()
+
+    def remove_project_relationships(self, pid):
+        with self.engine.connect() as conn:
+            stmt = delete(self.projects_users).where(self.projects_users.c.project_id == pid)
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
 dbh = Db_helper()
+
+dbh.remove_project(43)
 
 #tid = 22
 #dbh.remove_ticket(tid)

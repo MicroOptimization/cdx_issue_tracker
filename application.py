@@ -100,14 +100,16 @@ def delete_ticket(pid):
     delete_me_id = request.form.get("ticket_id")
     dbh = Db_helper()
     dbh.remove_ticket(delete_me_id)
-    
+
     return redirect("/project/" + str(pid))
+
+
 
 @application.route("/newticket/<int:pid>/<int:cid>", methods=["POST", "GET"])
 def add_ticket(pid, cid):
     if request.method == "POST":
-        print("col id: " , cid)
-        print("proj id: " , pid)
+        #print("col id: " , cid)
+        #print("proj id: " , pid)
 
         dbh = Db_helper()
         project_name = dbh.get_project_title_from_id(pid)
