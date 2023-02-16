@@ -286,7 +286,7 @@ class Db_helper:
 
 dbh = Db_helper()
 
-dbh.remove_project(43)
+
 
 #tid = 22
 #dbh.remove_ticket(tid)

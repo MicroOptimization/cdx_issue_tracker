@@ -97,10 +97,11 @@ def cur_project(pid):
 
 @application.route("/deleteticket/<int:pid>", methods= ["POST", "GET"])
 def delete_ticket(pid):
-    delete_me_id = request.form.get("ticket_id")
-    dbh = Db_helper()
-    dbh.remove_ticket(delete_me_id)
-
+    if request.form['delete_btn'] == "delete":
+        delete_me_id = request.form.get("ticket_id")
+        dbh = Db_helper()
+        dbh.remove_ticket(delete_me_id)
+    
     return redirect("/project/" + str(pid))
 
 
