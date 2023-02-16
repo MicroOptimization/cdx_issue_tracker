@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, URL, text, insert, Table, MetaData, Column, Integer, String, select
+from sqlalchemy import create_engine, URL, text, insert, Table, MetaData, Column, Integer, String, select, delete
 import os
 import bcrypt
 import datetime
@@ -250,7 +250,28 @@ class Db_helper:
             conn.close()
             return res.mappings().all()[0]
         
-#dbh = Db_helper()
+    def remove_ticket(self, tid):
+        #so basically if you want to remove a row that is a part of a many-many relationship, delete the rows of many-many relationship first
+        #I believe that that's because the many-many relationship references a row, and that probably causes something like a 
+        #null pointer. don't forget to commit.
+        with self.engine.connect() as conn:
+            self.remove_ticket_relationships(tid) 
+            stmt = delete(self.ticket).where(self.ticket.c.ticket_id == tid)
+            res = conn.execute(stmt)
+            conn.commit()
+            conn.close()
+    
+    def remove_ticket_relationships(self, tid): ######### will be useful later
+        with self.engine.connect() as conn:
+            stmt = delete(self.tickets_users).where(self.tickets_users.c.ticket_id == tid)
+            res = conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
+dbh = Db_helper()
+
+#tid = 22
+#dbh.remove_ticket(tid)
 
 #print(dbh.get_tickets_from_col(1))
 
