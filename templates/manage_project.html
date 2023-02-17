@@ -1,0 +1,63 @@
+{% extends 'base_navbars.html' %}
+
+{% block innerhead %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manage_project.css') }}">
+{% endblock %}
+<!-- params: tickets, users, -->
+{% block innerbody %}
+<div class="innerbody">
+    <div class="left_col">
+        <h1>Manage Project</h1>
+        <div class="user_list">
+            <div class="user_row">
+                <label class="user_name">Bob</label>
+                <label class="user_title">User</label>
+                <a>Remove</a>
+            </div>
+            <div class="user_row">
+                <label class="user_name">Jim</label>
+                <label class="user_title">Admin</label>
+                <a>Remove</a>
+            </div>
+            <div class="user_row">
+                <label class="user_name">Harry</label>
+                <label class="user_title">Manager</label>
+                <a>Remove</a>
+            </div>
+        </div>
+    </div>
+    <div class="right_col">
+        <div class="options">
+            <button onclick="toggle_assign_ticket()">Assign Ticket</button>
+            <button onclick="toggle_change_permissions()">Change Permissions</button>
+            <button onclick="toggle_new_contributor()">Add New Contributor</button>
+        </div>
+
+        <div class="context_div"> <!-- possible tickets or possible permissions to give. -->
+            <div class="add_user_div" id="add_user_div">
+                <form>
+                    <label>Enter the new User's Email</label>
+                    <input type="text" placeholder="Email">
+                    <input type="submit" value="add user">
+                </form>
+            </div>
+
+            <div class="permission_div" id="permission_div">
+                <div><a href="/home">Change permission to USER</a></div>
+                <div><a href="/home">Change permission to MANAGER</a></div>
+                <div><a href="/home">Change permission to OWNER</a></div>
+            </div>
+            
+            
+            <div class="ticket_list_div" id="ticket_list_div">
+                <h2>Tickets:</h2>
+                <div class="ticket_div"><label class="ticket_name"><a href="/home" class="ticket_link">Placeholder name</a></label></div>
+                <div class="ticket_div"><label class="ticket_name"><a href="/home" class="ticket_link">Placeholder 2 name</a></label></div>
+                <div class="ticket_div"><label class="ticket_name"><a href="/home" class="ticket_link">Placeholder 3 name</a></label></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='scripts/manage_project.js')}}"></script>
+{% endblock %}

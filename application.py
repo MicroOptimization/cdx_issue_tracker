@@ -138,10 +138,14 @@ def add_col(pid):
     return redirect("/project/" + str(pid))
 
 @application.route("/deletecol/<int:pid>/<int:cid>", methods=["POST", "GET"])
-def deletecol(pid, cid):
+def delete_col(pid, cid):
     dbh = Db_helper()
     dbh.delete_col(cid)
     return redirect("/project/" + str(pid)) 
 
+@application.route("/manageproject")
+def manage_project():
+    
+    return render_template("manage_project.html")
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

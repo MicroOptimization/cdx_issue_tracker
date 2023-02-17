@@ -5,5 +5,4 @@ function toggle_minimize_desc() {
     } else {
         desc.style.display = "flex"
     }
-
 }
