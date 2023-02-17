@@ -92,7 +92,7 @@ def cur_project(pid):
             if len(cur_col_tickets) != 0:
                 tickets[col["col_id"]] = cur_col_tickets
         
-        print("tix: " , tickets)
+        #print("tix: " , tickets)
         return render_template("project.html", project=project_info[0], cols=cols, tickets=tickets)
     #elif request.method == "POST":
     #    print(request.form['delete_ticket'])

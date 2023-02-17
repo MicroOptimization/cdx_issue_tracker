@@ -92,13 +92,16 @@
 
 .todo_columns {
     display: flex;
-    flex-wrap: wrap;
-
+    /*flex-wrap: wrap;
+*/
     gap: 50px;  
     max-width:62.5vw;
+    max-width:100%;
     width: calc(100% - 20px);
 
     height:100%;    
+    
+    overflow-x: scroll;
 }
 
 
@@ -106,7 +109,7 @@
 
 .col {
     background-color:royalblue;
-    width: 20%;
+    min-width: 15%;
     height:100%;
 }
 
