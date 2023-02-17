@@ -51,13 +51,13 @@
 }
 
 .user_row {
-    background-color: teal;
+    background-color: rgb(31, 202, 202);
     width:95%;
     margin-top:10px;
 
     display:flex;
     justify-content:space-between;
-    
+    padding:10px;
 }
 
 .options {

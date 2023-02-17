@@ -143,9 +143,11 @@ def delete_col(pid, cid):
     dbh.delete_col(cid)
     return redirect("/project/" + str(pid)) 
 
-@application.route("/manageproject")
-def manage_project():
-    
-    return render_template("manage_project.html")
+@application.route("/manageproject/<int:pid>")
+def manage_project(pid):
+    dbh = Db_helper()
+    tickets = dbh.get_project_tickets(pid)
+
+    return render_template("manage_project.html", tickets=tickets)
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

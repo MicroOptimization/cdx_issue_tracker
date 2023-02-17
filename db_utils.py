@@ -315,7 +315,15 @@ class Db_helper:
             conn.commit()
             conn.close()
 
+    def get_project_tickets(self, pid):
+        with self.engine.connect() as conn:
+            stmt = select(self.ticket).where(self.ticket.c.project_id == pid)
+            res = conn.execute(stmt)
+            rows = res.mappings().all()
+            return rows #list of row dicts
+
 dbh = Db_helper()
+
 
 #dbh.delete_col(9)
 

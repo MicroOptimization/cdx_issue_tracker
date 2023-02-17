@@ -10,7 +10,7 @@
         
         <div class="header_div">
             <h1>{{ project["title"] }}</h1>
-            <a href="/manageproject">Manage Members</a>
+            <a href="/manageproject/{{ project['project_id'] }}">Manage Members</a>
         </div>
         <div class="minimize_div">
             <button type="button" onclick="toggle_minimize_desc()"><i class="fa-solid fa-square-minus"></i></button>
