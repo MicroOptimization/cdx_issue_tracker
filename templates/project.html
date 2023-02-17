@@ -14,10 +14,10 @@
             <a href="/home">Manage Members</a>
         </div>
         <div class="minimize_div">
-            <button type="button"><i class="fa-solid fa-square-minus"></i></button>
+            <button type="button" onclick="toggle_minimize_desc()"><i class="fa-solid fa-square-minus"></i></button>
             
         </div>
-        <div class="desc_div">
+        <div class="desc_div" id="desc_div_id">
             <label>{{ project["description"] }}</label>
         </div>
         <div class="todo_div">
@@ -95,4 +95,5 @@
 </div>
 
 <script src="{{ url_for('static', filename='scripts/modal_scripts.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/project.js') }}"></script>
 {% endblock %}

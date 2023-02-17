@@ -91,11 +91,8 @@ def cur_project(pid):
             cur_col_tickets = dbh.get_tickets_from_col(col["col_id"])
             if len(cur_col_tickets) != 0:
                 tickets[col["col_id"]] = cur_col_tickets
-        
-        #print("tix: " , tickets)
         return render_template("project.html", project=project_info[0], cols=cols, tickets=tickets)
-    #elif request.method == "POST":
-    #    print(request.form['delete_ticket'])
+
     print("tix: 2 " , tickets)
     return render_template("project.html")
 
@@ -133,13 +130,11 @@ def add_ticket(pid, cid):
 def ticket(tid):
     dbh = Db_helper()
     tinfo = dbh.get_ticket_info_by_id(tid)
-    #print("tinfo: " , tinfo)
     return render_template("ticket.html", ticket_info = tinfo)
 
 @application.route("/createcol/<int:pid>", methods=["POST", "GET"])
 def add_col(pid):
     if request.form['create_col_btn'] == "create":
-        print("ADDING COL: PROJECT ID: " , pid)
         dbh = Db_helper()
         dbh.add_col(pid, request.form.get("col_name"))
     return redirect("/project/" + str(pid))
