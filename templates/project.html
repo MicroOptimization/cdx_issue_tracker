@@ -27,7 +27,9 @@
                     <div class="col">
                         <div class="col_heading_div">
                             <div><label class="col_heading">{{ col["col_title"] }}</label></div> 
-                            <button>delete</button>
+                            <form method="POST" action="/deletecol/{{ project['project_id'] }}/{{ col['col_id'] }}">
+                                <button class="delete_col_btn">delete</button>
+                            </form>
                         </div>
                         <div class="tickets">
                             {% if tickets|length > 0 %}

@@ -144,5 +144,11 @@ def add_col(pid):
         dbh.add_col(pid, request.form.get("col_name"))
     return redirect("/project/" + str(pid))
 
+@application.route("/deletecol/<int:pid>/<int:cid>", methods=["POST", "GET"])
+def deletecol(pid, cid):
+    dbh = Db_helper()
+    dbh.delete_col(cid)
+    return redirect("/project/" + str(pid)) 
+
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)
