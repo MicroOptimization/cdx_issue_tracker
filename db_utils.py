@@ -118,6 +118,8 @@ class Db_helper:
                     return (False, None)
         return (False, None)
     
+
+
     def create_project(self, project_details, uid):
         with self.engine.connect() as conn:
             stmt = insert(self.project).values(title=project_details[0], key_id=project_details[1], description=project_details[2]).returning(self.project.c.project_id)
@@ -149,6 +151,8 @@ class Db_helper:
             return True
         return False
 
+
+
     def get_pids(self, uid):
         with self.engine.connect() as conn:
             stmt = select(self.projects_users).where(self.projects_users.c.user_id == uid)
@@ -176,6 +180,8 @@ class Db_helper:
             return info #this is a list of dictionaries, each dictionary represents a project row, where the keys are columns 
         return None
     
+
+
     def create_ticket(self, pid, ticket_details):
         with self.engine.connect() as conn:
             stmt = insert(self.ticket).values(
@@ -217,6 +223,8 @@ class Db_helper:
     def assign_ticket_to_user(self, uid, tid):
         pass
         return False    
+
+
 
     def get_project_title_from_id(self, pid):
         with self.engine.connect() as conn:
@@ -289,14 +297,30 @@ class Db_helper:
             stmt = insert(self.col).values(
                 col_title = name,
                 project_id = pid 
-            ).returning(self.col.c.col_id)
-            res = conn.execute(stmt) #col id here if you need it later
+            )
+            conn.execute(stmt) #col id here if you need it later
+            conn.commit()
+            conn.close()
+    
+    def delete_col(self, cid):
+        with self.engine.connect() as conn:
+            tickets = self.get_tickets_from_col(cid)
+            if len(tickets) > 0: #there are associated tickets
+                #delete all associated tickets first if cols have tickets.
+                for ticket in tickets:
+                    self.remove_ticket(ticket['ticket_id'])
+            #and now we delete the column
+            stmt = delete(self.col).where(self.col.c.col_id == cid)
+            conn.execute(stmt)
             conn.commit()
             conn.close()
 
 dbh = Db_helper()
 
+#dbh.delete_col(9)
 
+#tid 47
+#cid 9
 
 #tid = 22
 #dbh.remove_ticket(tid)
