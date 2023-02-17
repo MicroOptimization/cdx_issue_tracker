@@ -26,7 +26,8 @@
                     {% for col in cols %}
                     <div class="col">
                         <div class="col_heading_div">
-                            <label class="col_heading"><b>{{ col["col_title"] }}</b></label>
+                            <div><label class="col_heading">{{ col["col_title"] }}</label></div> 
+                            <button>delete</button>
                         </div>
                         <div class="tickets">
                             {% if tickets|length > 0 %}

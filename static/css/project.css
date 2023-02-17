@@ -110,7 +110,10 @@
 .col {
     background-color:royalblue;
     min-width: 15%;
+    max-width:15%;
     height:100%;
+
+    
 }
 
 
@@ -118,13 +121,27 @@
     height:5%;
     display:flex;
     align-items:center;
+    justify-content: space-between;
     border-bottom: 1px black solid;
     margin-bottom:5px;
+
+
+    overflow:hidden;
+    display:flex;
+    flex-direction:row;
+    /*text-overflow:ellipsis;
+*/}
+
+.col_heading_div div {
+    text-overflow:ellipsis;
+    overflow:hidden;
+    height: 1em;
 }
 
 .col_heading {
     display:inline-block;
     padding-bottom:0px;
+
 }
 
 .add_col_btn {
@@ -143,6 +160,8 @@
     display: none; /* for Chrome, Safari, and Opera */
 }
 
+
+
 .ticket_div {
     width:100%;
     height:10%;
@@ -150,16 +169,22 @@
     background-color:rgb(199, 186, 186);
     margin-bottom:5%;
 
-    
     overflow:hidden;
     display:flex;
     flex-direction:row;
+    
 }
+
+
+
+
 
 .ticket_info_btn {
     display:block;
     height:100%;
     width:80%;
+    max-width:80%;
+    min-width:60%;
     background-color:red;
 }
 
