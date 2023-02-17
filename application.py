@@ -92,8 +92,6 @@ def cur_project(pid):
             if len(cur_col_tickets) != 0:
                 tickets[col["col_id"]] = cur_col_tickets
         return render_template("project.html", project=project_info[0], cols=cols, tickets=tickets)
-
-    print("tix: 2 " , tickets)
     return render_template("project.html")
 
 @application.route("/deleteticket/<int:pid>", methods= ["POST", "GET"])
