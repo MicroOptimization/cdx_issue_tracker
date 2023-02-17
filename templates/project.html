@@ -22,41 +22,74 @@
         </div>
         <div class="todo_div">
             <div class="todo_columns">
-                {% for col in cols %}
-                <div class="col">
-                    <div class="col_heading_div">
-                        <label class="col_heading"><b>{{ col["col_title"] }}</b></label>
-                    </div>
-                    <div class="tickets">
-                        {% for ticket in tickets[col["col_id"]] %}
-                            <div class="ticket_div">
-                                <a href="/ticket/{{ticket['ticket_id']}}" class="ticket_info_btn">{{ ticket["ticket_title"] }}</a>
-                                <button class="modal_btn" onclick="toggle_modal({{ ticket['ticket_id'] }})">delete</button>
+                {% if cols|length > 0 %}
+                    {% for col in cols %}
+                    <div class="col">
+                        <div class="col_heading_div">
+                            <label class="col_heading"><b>{{ col["col_title"] }}</b></label>
+                        </div>
+                        <div class="tickets">
+                            {% if tickets|length > 0 %}
+                                {% for ticket in tickets[col["col_id"]] %}
+                                    <div class="ticket_div">
+                                        <a href="/ticket/{{ticket['ticket_id']}}" class="ticket_info_btn">{{ ticket["ticket_title"] }}</a>
+                                        <button class="modal_btn" onclick="toggle_modal({{ ticket['ticket_id'] }})">delete</button>
 
+                                        <div class="modal" id="modal_id">
+                                            <div class="modal_content" id="ticket_modal">
+                                                <p>Are you sure you want to delete this ticket?</p>
+                                                <form method="POST" action="/deleteticket/{{ project['project_id'] }}">
+                                                    <input type="hidden" name="ticket_id" id ="tid_field" value="{{ ticket['ticket_id'] }}" />
+                                                    <input type="submit" value="delete" name="delete_btn">
+                                                    <input type="submit" value="cancel" name="delete_btn">
+                                                </form>
+                                            </div>
+
+                                            <div class="modal_content_column" id="column_modal">
+                                                <form method="POST" action="/createcol/{{ project['project_id'] }}">
+                                                    <input type="text" placeholder="New Column Name" name="col_name">
+                                                    <input type="submit" value="create" name="create_col_btn">
+                                                    <input type="submit" value="cancel" name="create_col_btn">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
                                 <div class="modal" id="modal_id">
-                                    <div class="modal_content">
-                                        <p>Are you sure you want to delete this ticket?</p>
-                                        <form method="POST" action="/deleteticket/{{ project['project_id'] }}">
-                                            <input type="hidden" name="ticket_id" id ="tid_field" value="{{ ticket['ticket_id'] }}" />
-                                            <input type="submit" value="delete" name="delete_btn">
-                                            <input type="submit" value="cancel" name="delete_btn">
+                                    <div class="modal_content" id="ticket_modal"></div>
+                                    <div class="modal_content_column" id="column_modal">
+                                        <form method="POST" action="/createcol/{{ project['project_id'] }}">
+                                            <input type="text" placeholder="New Column Name" name="col_name">
+                                            <input type="submit" value="create" name="create_col_btn">
+                                            <input type="submit" value="cancel" name="create_col_btn">
                                         </form>
                                     </div>
-                                    
                                 </div>
-
+                            {% endif %}
+                            <div class="ticket_div add_ticket">
+                                <a class="add_ticket_btn" href="/newticket/{{ project['project_id'] }}/{{ col['col_id'] }}">Add a ticket</a>
                             </div>
-                        {% endfor %}
-                        <div class="ticket_div add_ticket">
-                            <a class="add_ticket_btn" href="/newticket/{{ project['project_id'] }}/{{ col['col_id'] }}">Add a ticket</a>
                         </div>
                     </div>
+                    {% endfor %}
+                {% else %}
+                <div class="modal_content" id="ticket_modal"></div>
+                <div class="modal" id="modal_id">
+                    <div class="modal_content_column" id="column_modal">
+                        <form method="POST" action="/createcol/{{ project['project_id'] }}">
+                            <input type="text" placeholder="New Column Name" name="col_name">
+                            <input type="submit" value="create" name="create_col_btn">
+                            <input type="submit" value="cancel" name="create_col_btn">
+                        </form>
+                    </div>
                 </div>
-                {% endfor %}
-                <button class="add_col_btn" type="button"><i class="fa-solid fa-square-plus"></i></button> <!-- can only list 4 cols for now (including button)-->
+                {% endif %}
+                <button class="add_col_btn" type="button" onclick="toggle_col_modal()"><i class="fa-solid fa-square-plus"></i></button> <!-- can only list 4 cols for now (including button)-->
             </div>
         </div>
     </div>
 </div>
+
 <script src="{{ url_for('static', filename='scripts/modal_scripts.js') }}"></script>
 {% endblock %}

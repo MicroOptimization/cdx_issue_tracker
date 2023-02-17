@@ -284,6 +284,16 @@ class Db_helper:
             conn.commit()
             conn.close()
 
+    def add_col(self, pid, name):
+        with self.engine.connect() as conn:
+            stmt = insert(self.col).values(
+                col_title = name,
+                project_id = pid 
+            ).returning(self.col.c.col_id)
+            res = conn.execute(stmt) #col id here if you need it later
+            conn.commit()
+            conn.close()
+
 dbh = Db_helper()
 
 
