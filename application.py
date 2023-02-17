@@ -147,7 +147,7 @@ def delete_col(pid, cid):
 def manage_project(pid):
     dbh = Db_helper()
     tickets = dbh.get_project_tickets(pid)
-
-    return render_template("manage_project.html", tickets=tickets)
+    users = dbh.get_project_users(pid)
+    return render_template("manage_project.html", tickets=tickets, users=users)
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

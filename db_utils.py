@@ -319,11 +319,39 @@ class Db_helper:
         with self.engine.connect() as conn:
             stmt = select(self.ticket).where(self.ticket.c.project_id == pid)
             res = conn.execute(stmt)
+            tickets = res.mappings().all()
+            conn.close()
+            return tickets #list of row dicts
+        
+    def get_project_users(self, pid):
+        with self.engine.connect() as conn:
+            stmt = select(self.projects_users).where(self.projects_users.c.project_id == pid)
+            res = conn.execute(stmt)
+            conn.close()
             rows = res.mappings().all()
-            return rows #list of row dicts
+            uids = []
+            for relationship in rows:
+                uids.append(relationship["user_id"])
+            users = self.get_users_from_uids(uids)
+
+            return users
+        
+    def get_users_from_uids(self, uids):
+        rows = []
+        with self.engine.connect() as conn:
+            for uid in uids:
+                stmt = select(self.user_account).where(self.user_account.c.user_id == uid)
+                res = conn.execute(stmt)
+                row = res.mappings().all()[0]
+                rows.append(row)
+            conn.close()
+            return rows #returns a list of user row dicts
 
 dbh = Db_helper()
 
+#dbh.add_user_to_project(6, 2)
+
+#print(dbh.get_project_users(3))
 
 #dbh.delete_col(9)
 
