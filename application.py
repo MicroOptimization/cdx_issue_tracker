@@ -21,7 +21,6 @@ def main():
         dbh = Db_helper()     
         if len(login_info) == 2: #we've identified that we're TRYING to log in
             res = dbh.login(login_info[0], login_info[1])
-            print(type(res))
             if res[0]: #if login succeeded
                 print("log in success")
                 application.secret_key = secrets.token_urlsafe(16) #so this resets the session
@@ -202,6 +201,12 @@ def update_title():
     results = {'updated': 'true'}
     return jsonify(results)
 
+@application.route('/updateticketdesc', methods=['POST', 'GET'])
+def update_ticket_desc():
+    print("hi")
+    
+    results = {'updated': 'true'}
+    return jsonify(results)
 
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

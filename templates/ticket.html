@@ -2,11 +2,13 @@
 
 {% block innerhead %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/ticket.css') }}">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 {% endblock %}
 
 {% block innerbody %}
 <div class="innerbody">
     <div class="everything">
+        <input type="hidden" value="{{ ticket_info['ticket_id'] }}" id="tid_id">
         <div class="navbar_div">
             <div class="header_div">
                 <h1 class="ticket_name">{{ ticket_info["ticket_title"] }}</h1>
@@ -17,10 +19,13 @@
                 <label>-</label>
                 <label>{{ ticket_info["date_completed"] }}</label>
             </div>
-            <div class="desc_div">
-                <p class="desc">{{ ticket_info["description"] }}</p>
+            <div class="desc_div" id="desc_div_id">
+                <p id="desc_display">{{ ticket_info["description"] }}</p>
+                <textarea id="desc_edit">{{ ticket_info["description"] }}</textarea>
             </div>
         </div>
+
+
         <div class="navbar">
             <a>resolve</a>
             <a>assign</a>
@@ -28,4 +33,5 @@
         </div>
     </div>    
 </div>
+<script src="{{ url_for('static', filename='scripts/ticket.js') }}"></script>
 {% endblock %}

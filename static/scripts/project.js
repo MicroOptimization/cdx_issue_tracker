@@ -7,6 +7,9 @@ function toggle_minimize_desc() {
     }
 }
 
+
+
+/*We're making some fancy description editing stuff*/
 var edit_box = document.getElementById("edit_proj_desc")
 var desc_box = document.getElementById("proj_desc")
 var desc_div = document.getElementById("desc_div_id")
@@ -33,7 +36,6 @@ $('.desc_div').click(function(event) {
 
 //This function hides our edit box when we click off of it or press enter. and also updates our postgres db
 function edit_desc_listener(event) {
-    console.log("edl")
     if ((event.target != edit_box) || (event.key === "Enter")) {
         //These two lines hide our edit box after we're done with it
         edit_box.style.display = "none";
@@ -71,7 +73,7 @@ function send_new_desc_info() {
 }
 
 
-
+/*this is very similar, but for the title instead of the description*/
 var title_display = document.getElementById("title_display")
 var edit_title = document.getElementById("edit_title")
 
@@ -95,7 +97,6 @@ $('#title_span').click(function(event) {
 
 
 function edit_title_listener(event) {
-    console.log("etl")
     if ((event.target != edit_title) || (event.key === "Enter")) {
         //These two lines hide our edit box after we're done with it
         edit_title.style.display = "none";
@@ -118,7 +119,6 @@ function send_new_title_info() {
         "new_title": edit_title.value, 
         "project_id": pid
     };
-    console.log("here")
     $.ajax({
         type: "POST", //method
         url: "/updatetitle", //this is the flask route
