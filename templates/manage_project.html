@@ -62,10 +62,10 @@
                     <!--The following code is psychopathic and is just insane.-->
                     <div class="ticket_div">
                         <label class="ticket_name">
-                        <form method="POST" >
-                            <input type="hidden" value="spaghetti" id="ticket_info_{{ ticket['ticket_id'] }}" name="ticket_info_{{ ticket['ticket_id'] }}">
-                            <input class="ticket_btn" type="submit" value="{{ ticket['title'] }}" onclick="set_selected_user_id('ticket_info_{{ ticket["ticket_id"] }}')" formaction="/assignticket/{{ ticket['ticket_id'] }}/{{ pid }}">
-                        </form>
+                            <form method="POST" >
+                                <input type="hidden" value="spaghetti" id="ticket_info_{{ ticket['ticket_id'] }}" name="ticket_info_{{ ticket['ticket_id'] }}">
+                                <input class="ticket_btn" type="submit" value="{{ ticket['title'] }}" onclick="set_selected_user_id('ticket_info_{{ ticket["ticket_id"] }}')" formaction="/assignticket/{{ ticket['ticket_id'] }}/{{ pid }}">
+                            </form>
                         </label>
                     </div>
                     <!--So the onclick function will basically update our hidden value which is -->

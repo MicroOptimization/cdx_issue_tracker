@@ -230,7 +230,12 @@ class Db_helper:
         return None
 
     def assign_ticket_to_user(self, uid, tid):
-        pass
+        with self.engine.connect() as conn:
+            stmt = insert(self.tickets_users).values(user_id=uid, ticket_id=tid)
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
         return False    
 
 

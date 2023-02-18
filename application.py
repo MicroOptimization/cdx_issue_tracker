@@ -175,13 +175,17 @@ def assign_ticket(tid, pid):
         print("posting")
 
     print("ticket_info_" + str(tid))
-    user_id = request.form.get("ticket_info_" + str(tid))
+    user_id = int(request.form.get("ticket_info_" + str(tid)))
     print("uid: " , user_id)
+    print(type(user_id))
     print("assigning ticket: " , tid)
     if user_id == "undefined": #they didn't select a user yet
+        print("a")
         pass
-    dbh = Db_helper()
-    #dbh.assign_ticket_to_user(uid, tid)
+    else:
+        print("b")
+        dbh = Db_helper()
+        dbh.assign_ticket_to_user(user_id, tid)
     return redirect("/manageproject/" + str(pid))
 
 if __name__ == "__main__":
