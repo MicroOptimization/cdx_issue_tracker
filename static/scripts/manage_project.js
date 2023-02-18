@@ -40,6 +40,7 @@ $('.user_row').click(function(event) {
     selected_user_id = temp[2]    
 });
 
-function get_selected_user_id() {
-    return selected_user_id
+function set_selected_user_id(id) {
+    ele = document.getElementById(id)
+    ele.value = selected_user_id
 }

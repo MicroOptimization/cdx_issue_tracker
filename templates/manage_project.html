@@ -47,7 +47,26 @@
             <div class="ticket_list_div" id="ticket_list_div">
                 <h2>Tickets:</h2>
                 {% for ticket in tickets %}
-                    <div class="ticket_div"><label class="ticket_name"><a href="/home" class="ticket_link">{{ ticket["title"]}}</a></label></div>
+                    <!-- problem area -->
+                    <!--
+                    <form method="POST">
+                        <input type="hidden" value="spaghetti" id="ticket_info_{{ ticket['ticket_id'] }}" name="ticket_info_{{ ticket['ticket_id'] }}">
+                    </form>
+                    <div class="ticket_div">
+                        <label class="ticket_name">
+                            <a href="/assignticket/{{ ticket['ticket_id'] }}/{{ pid }}" class="ticket_link" onclick='set_selected_user_id("ticket_info_{{ ticket['ticket_id'] }}")'>{{ ticket["title"] }}</a>
+                        </label>
+                    </div>-->
+                    <!-- end problem area -->
+                    
+                    <div class="ticket_div">
+                        <label class="ticket_name">
+                        <form method="POST" >
+                            <input type="hidden" value="spaghetti" id="ticket_info_{{ ticket['ticket_id'] }}" name="ticket_info_{{ ticket['ticket_id'] }}">
+                            <input type="submit" value="{{ ticket['title'] }}" onclick="set_selected_user_id('ticket_info_{{ ticket["ticket_id"] }}')" formaction="/assignticket/{{ ticket['ticket_id'] }}/{{ pid }}">
+                        </form>
+                        </label>
+                    </div>
                 {% endfor %}
             </div>
         </div>

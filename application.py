@@ -169,5 +169,18 @@ def remove_user(pid, uid):
     dbh.remove_user_from_project(uid, pid)
     return redirect("/manageproject/" + str(pid))
 
+@application.route("/assignticket/<int:tid>/<int:pid>", methods=["POST", "GET"])
+def assign_ticket(tid, pid):
+    if request.method == "POST":
+        print("posting")
+        
+    print("ticket_info_" + str(tid))
+    temp = request.form.get("ticket_info_" + str(tid))
+    print("temp: " , temp)
+    print("assigning ticket: " , tid)
+    dbh = Db_helper()
+    #dbh.assign_ticket_to_user(uid, tid)
+    return redirect("/manageproject/" + str(pid))
+
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)
