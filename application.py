@@ -166,7 +166,6 @@ def add_user(pid):
 @application.route("/removeuser/<int:pid>/<int:uid>", methods=["POST", "GET"])
 def remove_user(pid, uid):
     dbh = Db_helper()
-    print(pid, uid)
     dbh.remove_user_from_project(uid, pid)
     return redirect("/manageproject/" + str(pid))
 

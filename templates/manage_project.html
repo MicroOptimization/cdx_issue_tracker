@@ -2,6 +2,8 @@
 
 {% block innerhead %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/manage_project.css') }}">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 {% endblock %}
 <!-- params: tickets, users, -->
 {% block innerbody %}
@@ -10,7 +12,7 @@
         <h1>Manage Project</h1>
         <div class="user_list">
             {% for user in users %}
-            <div class="user_row">
+            <div id="user_row_{{ user['user_id'] }}" class="user_row">
                 <label class="user_name">{{ user['username'] }}</label>
                 <label class="user_title">Placeholder for rank</label>
                 <a href="/removeuser/{{ pid }}/{{ user['user_id'] }}">Remove</a>
@@ -51,6 +53,5 @@
         </div>
     </div>
 </div>
-
 <script src="{{ url_for('static', filename='scripts/manage_project.js')}}"></script>
 {% endblock %}
