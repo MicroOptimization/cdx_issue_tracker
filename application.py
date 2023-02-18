@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, g
+from flask import Flask, render_template, request, session, redirect, g, jsonify
 from db_utils import Db_helper
 import secrets
 
@@ -173,6 +173,22 @@ def assign_ticket(tid, pid):
         dbh = Db_helper()
         dbh.assign_ticket_to_user(user_id, tid)
     return redirect("/manageproject/" + str(pid))
+
+"""
+@application.route("/ajaxtest", methods=["POST", "GET"])
+def ajax_test():
+    print("hi ajax here")
+    return redirect("/home")
+"""
+
+@application.route('/updatedesc', methods=['POST', 'GET'])
+def update_desc():
+    if request.method == "POST":
+        desc_data = request.get_json()
+        print(desc_data)
+ 
+    results = {'updated': 'true'}
+    return jsonify(results)
 
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

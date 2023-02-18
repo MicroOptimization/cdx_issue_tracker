@@ -36,9 +36,40 @@ window.addEventListener("click", function(event) {
     if (event.target != edit_box) {
         edit_box.style.display = "none";
         desc_box.style.display = "block";
+
+        //pass pid
+        //pass text
+
+        var desc_data = [ //the actual data that we're passing back to our flask function
+            {"new_text": edit_box.value},
+            {"project_id": 6}
+        ];
+
+        $.ajax({
+            type: "POST", //method
+            url: "/updatedesc", //this is the flask route
+            data: JSON.stringify(desc_data), //I have no idea what this is
+            contentType: "application/json",
+            dataType: 'json' 
+        });
+        /*
+        var server_data = [ //the actual data that we're passing back to our flask function
+            {"QTc": 1},
+            {"prolonged": 2},
+            {"HR": 3},
+            {"QT": 4},
+            {"Sex": 5}
+        ];
+
+        $.ajax({
+            type: "POST", //method
+            url: "/process_qtc", //this is the flask route
+            data: JSON.stringify(server_data), //I have no idea what this is
+            contentType: "application/json",
+            dataType: 'json' 
+        });
+        */
     }
 });
-
-
 
 
