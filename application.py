@@ -203,8 +203,12 @@ def update_title():
 
 @application.route('/updateticketdesc', methods=['POST', 'GET'])
 def update_ticket_desc():
-    print("hi")
-    
+    if request.method == "POST":
+        desc_data = request.get_json()
+        new_desc = desc_data["new_desc"]
+        tid = desc_data["ticket_id"]
+        dbh = Db_helper()
+        dbh.edit_ticket_desc(tid, new_desc)
     results = {'updated': 'true'}
     return jsonify(results)
 
