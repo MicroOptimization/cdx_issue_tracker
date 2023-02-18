@@ -2,6 +2,7 @@
 
 {% block innerhead %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/project.css') }}">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 {% endblock %}
 
 {% block innerbody %}
@@ -17,8 +18,10 @@
             
         </div>
         <div class="desc_div" id="desc_div_id">
-            <label>{{ project["description"] }}</label>
+            <label id="proj_desc">{{ project["description"] }}</label>
+            <textarea id="edit_proj_desc"></textarea>
         </div>
+
         <div class="todo_div">
             <div class="todo_columns">
                 {% if cols|length > 0 %}

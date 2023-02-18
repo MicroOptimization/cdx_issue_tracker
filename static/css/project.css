@@ -234,3 +234,16 @@
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
 }
+
+
+#proj_desc {
+    display:block;
+}
+
+#edit_proj_desc {
+    display:none;
+
+    width:100%;
+    height:100%;
+    background-color:white;
+}

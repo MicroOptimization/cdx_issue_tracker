@@ -26,7 +26,8 @@ function toggle_new_contributor() {
 
 
 
-$('.user_row').click(function(event) {
+$('.user_row').click(function(event) { //sets the click function for every element of class .user_row
+
     //these 5 lines create the visual indicator that shows what user is being selected
     if (typeof selected_user_css_id !== 'undefined') {
         document.getElementById(selected_user_css_id).style.backgroundColor = "#1fcaca"
