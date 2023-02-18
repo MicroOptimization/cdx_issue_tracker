@@ -17,13 +17,8 @@ var desc_div = document.getElementById("desc_div_id")
 
 
 $('.desc_div').click(function(event) {
-    console.log("desc div being clicked")
-    
-    console.log(edit_box.style.display)
-
     if (edit_box.style.display == "none") { //if edit box is not out
-        console.log("a")
-        
+
         edit_box.style.display = "block";
         desc_box.style.display = "none";
         edit_box.removeAttribute('readonly');
@@ -32,16 +27,19 @@ $('.desc_div').click(function(event) {
 });
 
 //function (a)
-//This function hides our edit box when we click off of it
-window.addEventListener("click", function(event) {
-    if (event.target != edit_box) {
+window.addEventListener("click", edit_desc_listener);
+window.addEventListener("keypress", edit_desc_listener);
+
+//This function hides our edit box when we click off of it or press enter. and also updates our postgres db
+function edit_desc_listener(event) {
+    if ((event.target != edit_box) || (event.key === "Enter")) {
         //These two lines hide our edit box after we're done with it
         edit_box.style.display = "none";
         desc_box.style.display = "block";
 
         send_new_desc_info()
     }
-});
+}
 
 function send_new_desc_info() {
     var pid = document.getElementById("pid_id").value; //Yes this is a hidden input field that stores our project id lol
