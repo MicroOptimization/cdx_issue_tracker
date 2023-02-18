@@ -108,7 +108,7 @@
 
 
 .col {
-    background-color:royalblue;
+    background-color:rgb(150, 115, 115);
     min-width: 15%;
     max-width:15%;
     height:100%;
@@ -185,7 +185,7 @@
     width:80%;
     max-width:80%;
     min-width:60%;
-    background-color:red;
+    background-color:rgb(100, 185, 185);
 }
 
 .add_ticket {

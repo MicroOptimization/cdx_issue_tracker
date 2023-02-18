@@ -108,9 +108,6 @@ def delete_ticket(pid):
 @application.route("/newticket/<int:pid>/<int:cid>", methods=["POST", "GET"])
 def add_ticket(pid, cid):
     if request.method == "POST":
-        #print("col id: " , cid)
-        #print("proj id: " , pid)
-
         dbh = Db_helper()
         project_name = dbh.get_project_title_from_id(pid)
         ticket_info = {
@@ -171,19 +168,8 @@ def remove_user(pid, uid):
 
 @application.route("/assignticket/<int:tid>/<int:pid>", methods=["POST", "GET"])
 def assign_ticket(tid, pid):
-    if request.method == "POST":
-        print("posting")
-
-    print("ticket_info_" + str(tid))
     user_id = int(request.form.get("ticket_info_" + str(tid)))
-    print("uid: " , user_id)
-    print(type(user_id))
-    print("assigning ticket: " , tid)
-    if user_id == "undefined": #they didn't select a user yet
-        print("a")
-        pass
-    else:
-        print("b")
+    if user_id != "undefined": #if user_id is undefined, that means a user was not selected before button press.
         dbh = Db_helper()
         dbh.assign_ticket_to_user(user_id, tid)
     return redirect("/manageproject/" + str(pid))
