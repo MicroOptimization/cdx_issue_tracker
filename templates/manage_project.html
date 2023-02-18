@@ -13,7 +13,7 @@
             <div class="user_row">
                 <label class="user_name">{{ user['username'] }}</label>
                 <label class="user_title">Placeholder for rank</label>
-                <a>Remove</a>
+                <a href="/removeuser/{{ pid }}/{{ user['user_id'] }}">Remove</a>
             </div>
             {% endfor %}
             

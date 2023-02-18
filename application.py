@@ -143,6 +143,8 @@ def delete_col(pid, cid):
     dbh.delete_col(cid)
     return redirect("/project/" + str(pid)) 
 
+
+
 @application.route("/manageproject/<int:pid>")
 def manage_project(pid):
     dbh = Db_helper()
@@ -159,6 +161,13 @@ def add_user(pid):
     uid = dbh.get_uid_by_email(email)
     dbh.add_user_to_project(uid, pid)
 
+    return redirect("/manageproject/" + str(pid))
+
+@application.route("/removeuser/<int:pid>/<int:uid>", methods=["POST", "GET"])
+def remove_user(pid, uid):
+    dbh = Db_helper()
+    print(pid, uid)
+    dbh.remove_user_from_project(uid, pid)
     return redirect("/manageproject/" + str(pid))
 
 if __name__ == "__main__":

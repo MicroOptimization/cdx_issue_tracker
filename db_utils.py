@@ -143,7 +143,6 @@ class Db_helper:
     
     def get_uid_by_email(self, email):
         with self.engine.connect() as conn:
-            print("email: " , email)
             stmt = select(self.user_account).where(self.user_account.c.email == email)
             res = conn.execute(stmt)
             rows = res.mappings().all()
@@ -357,7 +356,18 @@ class Db_helper:
             conn.close()
             return rows #returns a list of user row dicts
 
+    def remove_user_from_project(self, uid, pid):
+        with self.engine.connect() as conn:
+            stmt = delete(self.projects_users).where((self.projects_users.c.project_id == pid) & (self.projects_users.c.user_id == uid))
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
 dbh = Db_helper()
+pid = 3
+uid = 6
+#dbh.add_user_to_project(uid, pid)
+#dbh.remove_user_from_project(uid, pid)
 
 #dbh.get_uid_by_email("parm@gmail.com")
 
