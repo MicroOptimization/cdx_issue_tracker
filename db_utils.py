@@ -389,6 +389,13 @@ class Db_helper:
             conn.commit()
             conn.close()
 
+    def edit_ticket_title(self, tid, new_title):
+        with self.engine.connect() as conn:
+            stmt = update(self.ticket).where(self.ticket.c.ticket_id == tid).values(title=new_title)
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
 dbh = Db_helper()
 pid = 3
 uid = 6

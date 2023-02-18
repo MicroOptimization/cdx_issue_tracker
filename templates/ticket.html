@@ -11,7 +11,10 @@
         <input type="hidden" value="{{ ticket_info['ticket_id'] }}" id="tid_id">
         <div class="navbar_div">
             <div class="header_div">
-                <h1 class="ticket_name">{{ ticket_info["ticket_title"] }}</h1>
+                <span id="title_span">
+                    <h1 class="ticket_name" id="ticket_name_id">{{ ticket_info["ticket_title"] }}</h1>
+                    <textarea id="edit_ticket_name_id">{{ ticket_info["ticket_title"] }}</textarea>
+                </span>
                 <label class="project_name"><a href="/project/{{ ticket_info['project_id'] }}">{{ ticket_info["project_title"] }}</a></label>
             </div>
             <div class="timestamp_div">
