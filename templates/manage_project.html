@@ -16,21 +16,7 @@
                 <a>Remove</a>
             </div>
             {% endfor %}
-            <div class="user_row">
-                <label class="user_name">Bob</label>
-                <label class="user_title">Placholder for rank</label>
-                <a>Remove</a>
-            </div>
-            <div class="user_row">
-                <label class="user_name">Jim</label>
-                <label class="user_title">Placholder for rank</label>
-                <a>Remove</a>
-            </div>
-            <div class="user_row">
-                <label class="user_name">Harry</label>
-                <label class="user_title">Placholder for rank</label>
-                <a>Remove</a>
-            </div>
+            
         </div>
     </div>
     <div class="right_col">
@@ -42,9 +28,9 @@
 
         <div class="context_div"> <!-- possible tickets or possible permissions to give. -->
             <div class="add_user_div" id="add_user_div">
-                <form>
+                <form action="/adduser/{{ pid }}" method="POST">
                     <label>Enter the new User's Email</label>
-                    <input type="text" placeholder="Email">
+                    <input type="text" placeholder="Email" name="email">
                     <input type="submit" value="add user">
                 </form>
             </div>

@@ -141,6 +141,16 @@ class Db_helper:
             return True
         return False
     
+    def get_uid_by_email(self, email):
+        with self.engine.connect() as conn:
+            print("email: " , email)
+            stmt = select(self.user_account).where(self.user_account.c.email == email)
+            res = conn.execute(stmt)
+            rows = res.mappings().all()
+            uid = rows[0]["user_id"]
+            conn.close()
+            return uid
+        
     def add_user_to_project(self, uid, pid):
         with self.engine.connect() as conn:
             stmt = insert(self.projects_users).values(project_id=pid, user_id=uid)
@@ -348,6 +358,8 @@ class Db_helper:
             return rows #returns a list of user row dicts
 
 dbh = Db_helper()
+
+#dbh.get_uid_by_email("parm@gmail.com")
 
 #dbh.add_user_to_project(6, 2)
 

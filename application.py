@@ -148,6 +148,18 @@ def manage_project(pid):
     dbh = Db_helper()
     tickets = dbh.get_project_tickets(pid)
     users = dbh.get_project_users(pid)
-    return render_template("manage_project.html", tickets=tickets, users=users)
+
+    return render_template("manage_project.html", tickets=tickets, users=users, pid=pid)
+
+@application.route("/adduser/<int:pid>", methods=["POST", "GET"])
+def add_user(pid):
+    dbh = Db_helper()
+    email = request.form.get("email")
+
+    uid = dbh.get_uid_by_email(email)
+    dbh.add_user_to_project(uid, pid)
+
+    return redirect("/manageproject/" + str(pid))
+
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)
