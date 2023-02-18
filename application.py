@@ -189,5 +189,19 @@ def update_desc():
     results = {'updated': 'true'}
     return jsonify(results)
 
+@application.route('/updatetitle', methods=['POST', 'GET'])
+def update_title():
+    if request.method == "POST":
+        title_data = request.get_json()
+        new_title = title_data["new_title"]
+        pid = title_data["project_id"]
+
+        dbh = Db_helper()
+        dbh.edit_project_title(pid, new_title)
+
+    results = {'updated': 'true'}
+    return jsonify(results)
+
+
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

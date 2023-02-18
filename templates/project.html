@@ -11,7 +11,10 @@
     <div class="margin_div">
         <input type="hidden" value="{{ project['project_id'] }}" id="pid_id">
         <div class="header_div">
-            <h1>{{ project["title"] }}</h1>
+            <span id="title_span">
+                <h1 id="title_display">{{ project["title"] }}</h1>
+                <textarea id="edit_title">{{ project["title"] }}</textarea>
+            </span>
             <a href="/manageproject/{{ project['project_id'] }}">Manage Members</a>
         </div>
         <div class="minimize_div">

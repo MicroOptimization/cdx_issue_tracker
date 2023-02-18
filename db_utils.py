@@ -375,6 +375,13 @@ class Db_helper:
             conn.commit()
             conn.close()
 
+    def edit_project_title(self, pid, new_title):
+        with self.engine.connect() as conn:
+            stmt = update(self.project).where(self.project.c.project_id == pid).values(title=new_title)
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
 dbh = Db_helper()
 pid = 3
 uid = 6
