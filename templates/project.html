@@ -9,7 +9,7 @@
 {% block innerbody %}
 <div class="innerbody">
     <div class="margin_div">
-        
+        <input type="hidden" value="{{ project['project_id'] }}" id="pid_id">
         <div class="header_div">
             <h1>{{ project["title"] }}</h1>
             <a href="/manageproject/{{ project['project_id'] }}">Manage Members</a>
@@ -19,6 +19,7 @@
             
         </div>
         <div class="desc_div" id="desc_div_id">
+
             <label id="proj_desc">{{ project["description"] }}</label>
             <textarea id="edit_proj_desc">{{ project['description'] }}</textarea>
         </div>

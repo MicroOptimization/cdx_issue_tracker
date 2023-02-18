@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, URL, text, insert, Table, MetaData, Column, Integer, String, select, delete
+from sqlalchemy import create_engine, URL, text, Table, MetaData, Column, Integer, String, select, delete, update, insert
 import os
 import bcrypt
 import datetime
@@ -364,6 +364,13 @@ class Db_helper:
     def remove_user_from_project(self, uid, pid):
         with self.engine.connect() as conn:
             stmt = delete(self.projects_users).where((self.projects_users.c.project_id == pid) & (self.projects_users.c.user_id == uid))
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
+    def edit_project_desc(self, pid, new_text):
+        with self.engine.connect() as conn:
+            stmt = update(self.project).where(self.project.c.project_id == pid).values(description=new_text)
             conn.execute(stmt)
             conn.commit()
             conn.close()

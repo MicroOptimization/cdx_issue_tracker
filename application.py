@@ -91,6 +91,7 @@ def cur_project(pid):
             cur_col_tickets = dbh.get_tickets_from_col(col["col_id"])
             if len(cur_col_tickets) != 0:
                 tickets[col["col_id"]] = cur_col_tickets
+
         return render_template("project.html", project=project_info[0], cols=cols, tickets=tickets)
     return render_template("project.html")
 
@@ -174,19 +175,17 @@ def assign_ticket(tid, pid):
         dbh.assign_ticket_to_user(user_id, tid)
     return redirect("/manageproject/" + str(pid))
 
-"""
-@application.route("/ajaxtest", methods=["POST", "GET"])
-def ajax_test():
-    print("hi ajax here")
-    return redirect("/home")
-"""
-
 @application.route('/updatedesc', methods=['POST', 'GET'])
 def update_desc():
     if request.method == "POST":
         desc_data = request.get_json()
-        print(desc_data)
- 
+        new_text = desc_data["new_text"]
+        pid = desc_data["project_id"]
+
+        print(new_text, pid)
+        dbh = Db_helper()
+        dbh.edit_project_desc(pid, new_text)
+
     results = {'updated': 'true'}
     return jsonify(results)
 
