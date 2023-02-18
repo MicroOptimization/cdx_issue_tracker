@@ -173,11 +173,13 @@ def remove_user(pid, uid):
 def assign_ticket(tid, pid):
     if request.method == "POST":
         print("posting")
-        
+
     print("ticket_info_" + str(tid))
-    temp = request.form.get("ticket_info_" + str(tid))
-    print("temp: " , temp)
+    user_id = request.form.get("ticket_info_" + str(tid))
+    print("uid: " , user_id)
     print("assigning ticket: " , tid)
+    if user_id == "undefined": #they didn't select a user yet
+        pass
     dbh = Db_helper()
     #dbh.assign_ticket_to_user(uid, tid)
     return redirect("/manageproject/" + str(pid))
