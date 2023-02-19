@@ -396,6 +396,13 @@ class Db_helper:
             conn.commit()
             conn.close()
 
+    def edit_col(self, cid, new_title):
+        with self.engine.connect() as conn:
+            stmt = update(self.col).where(self.col.c.col_id == cid).values(col_title=new_title)
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
 dbh = Db_helper()
 pid = 3
 uid = 6

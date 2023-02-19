@@ -125,6 +125,7 @@
     border-bottom: 1px black solid;
     margin-bottom:5px;
 
+    
 
     overflow:hidden;
     display:flex;
@@ -132,10 +133,13 @@
     /*text-overflow:ellipsis;
 */}
 
-.col_heading_div div {
+.heading_label_div {
     text-overflow:ellipsis;
     overflow:hidden;
     height: 1em;
+
+    min-width:80%;
+    background-color:white;
 }
 
 .col_heading {
@@ -263,4 +267,12 @@
     border:none;
     font-size:3em;
     overflow:hidden;
+}
+
+.col_edit_class {
+    height:100%;
+    width:100%;
+    font-size:1em;
+    
+    background-color: rgb(221, 199, 199);
 }

@@ -181,7 +181,6 @@ def update_desc():
         new_text = desc_data["new_text"]
         pid = desc_data["project_id"]
 
-        print(new_text, pid)
         dbh = Db_helper()
         dbh.edit_project_desc(pid, new_text)
 
@@ -220,6 +219,18 @@ def update_ticket_title():
         tid = title_data["ticket_id"]
         dbh = Db_helper()
         dbh.edit_ticket_title(tid, new_title)
+    results = {'updated': 'true'}
+    return jsonify(results)
+
+@application.route('/updatecol', methods=['POST', 'GET'])
+def update_col():
+    if request.method == "POST":
+        col_data = request.get_json()
+        new_title = col_data["new_title"]
+        cid = col_data["col_id"]
+
+        dbh = Db_helper()
+        dbh.edit_col(cid, new_title)
     results = {'updated': 'true'}
     return jsonify(results)
 

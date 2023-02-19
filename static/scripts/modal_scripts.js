@@ -4,7 +4,6 @@ var ticket_modal = document.getElementById("ticket_modal");
 
 
 document.body.onload = function() {
-    console.log("hi")
     modal = document.getElementById("modal_id");
     column_modal = document.getElementById("column_modal");
     ticket_modal = document.getElementById("ticket_modal");
@@ -19,7 +18,6 @@ function toggle_modal(tid) {
 }
 
 function toggle_col_modal() {
-    console.log("hi")
     modal.style.display = "block";
     
     ticket_modal.style.display = "none"
