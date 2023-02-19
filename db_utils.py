@@ -406,28 +406,6 @@ class Db_helper:
 dbh = Db_helper()
 pid = 3
 uid = 6
-#dbh.add_user_to_project(uid, pid)
-#dbh.remove_user_from_project(uid, pid)
 
-#dbh.get_uid_by_email("parm@gmail.com")
 
-#dbh.add_user_to_project(6, 2)
-
-#print(dbh.get_project_users(3))
-
-#dbh.delete_col(9)
-
-#tid 47
-#cid 9
-
-#tid = 22
-#dbh.remove_ticket(tid)
-
-#print(dbh.get_tickets_from_col(1))
-
-#print(dbh.get_project_title_from_id(3))
-#print(dbh.get_cols(3))
-
-#3 is blue lock's project_id
-#24 is spaghetti's user_id
 
