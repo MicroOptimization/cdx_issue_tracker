@@ -49,6 +49,7 @@
     width:70%;
     height:20%;
     font-size:30px;
+    
     background:white;
 
     display:flex;
@@ -125,7 +126,6 @@
     border-bottom: 1px black solid;
     margin-bottom:5px;
 
-    
 
     overflow:hidden;
     display:flex;
@@ -136,10 +136,9 @@
 .heading_label_div {
     text-overflow:ellipsis;
     overflow:hidden;
-    height: 1em;
+    height: 100%;
 
     min-width:80%;
-    background-color:white;
 }
 
 .col_heading {
@@ -274,5 +273,6 @@
     width:100%;
     font-size:1em;
     
-    background-color: rgb(221, 199, 199);
-}
+    display:none;
+    /*background-color: rgb(221, 199, 199);
+*/}

@@ -146,7 +146,6 @@ var col_edit = undefined;
 $('.heading_label_div').click(function(event) {
     cid = event.target.id.split("_")[2]
 
-    //console.log("current column: " + cid)
     set_col_edit_variables()
 
     if (col_display.style.display == "block") {
@@ -156,7 +155,7 @@ $('.heading_label_div').click(function(event) {
         window.addEventListener("click", edit_col_listener);
         window.addEventListener("keypress", edit_col_listener);
         event.stopPropagation()
-        
+
         col_edit.focus()
     }
 });
@@ -185,7 +184,6 @@ function edit_col_listener(event) {
 }
 
 function send_new_col_info() {
-  
     //the actual data that we're passing back to our flask function
     var col_data = {
         "new_title": col_edit.value, 
