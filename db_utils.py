@@ -403,9 +403,19 @@ class Db_helper:
             conn.commit()
             conn.close()
 
+    def check_email(self, email): #checks if a email is being used by a current account
+        with self.engine.connect() as conn:
+            stmt = select(self.user_account).where(self.user_account.c.email == email)
+            res = conn.execute(stmt)
+            rows = res.mappings().all()
+            conn.close()
+            return len(rows) != 0 
+
+
 dbh = Db_helper()
 pid = 3
 uid = 6
 
+print(dbh.check_email("parma@gmail.com"))
 
 

@@ -57,7 +57,7 @@ form * {
 }
 
 .login_container {
-    height: 30%;
+    height: 35%;
     width: 25%;
     
     display: flex;
@@ -82,7 +82,7 @@ form * {
 }
 
 .login_button {
-    width:25%;
+    width:30%;
     border-radius:7px;
     border-width:1px;
     
@@ -118,5 +118,9 @@ a {
 }
 
 #acc_made {
-    visibility: hidden;
+    display:none;
+}
+
+.forgot_div {
+    display:none;
 }

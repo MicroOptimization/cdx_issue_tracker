@@ -151,7 +151,7 @@ def manage_project(pid):
     return render_template("manage_project.html", tickets=tickets, users=users, pid=pid)
 
 @application.route("/adduser/<int:pid>", methods=["POST", "GET"])
-def add_user(pid):
+def add_user(pid): #to project
     dbh = Db_helper()
     email = request.form.get("email")
 
@@ -161,7 +161,7 @@ def add_user(pid):
     return redirect("/manageproject/" + str(pid))
 
 @application.route("/removeuser/<int:pid>/<int:uid>", methods=["POST", "GET"])
-def remove_user(pid, uid):
+def remove_user(pid, uid): #from project
     dbh = Db_helper()
     dbh.remove_user_from_project(uid, pid)
     return redirect("/manageproject/" + str(pid))
@@ -175,7 +175,7 @@ def assign_ticket(tid, pid):
     return redirect("/manageproject/" + str(pid))
 
 @application.route('/updatedesc', methods=['POST', 'GET'])
-def update_desc():
+def update_desc(): #project description
     if request.method == "POST":
         desc_data = request.get_json()
         new_text = desc_data["new_text"]
@@ -188,7 +188,7 @@ def update_desc():
     return jsonify(results)
 
 @application.route('/updatetitle', methods=['POST', 'GET'])
-def update_title():
+def update_title(): #project title
     if request.method == "POST":
         title_data = request.get_json()
         new_title = title_data["new_title"]

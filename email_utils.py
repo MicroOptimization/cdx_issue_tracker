@@ -14,10 +14,10 @@ app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
 
-@app.route("/")
+@app.route("/sendpasswordreset")
 def index():
-   msg = Message('Hello', sender = 'SpaghettiHorseRadish@gmail.com', recipients = ['81h6a3@gmail.com'])
-   msg.body = "This is the email body again"
+   msg = Message('Title', sender = 'SpaghettiHorseRadish@gmail.com', recipients = ['81h6a3@gmail.com'])
+   msg.body = "This is the email body/message"
    mail.send(msg)
    return "Sent"
 

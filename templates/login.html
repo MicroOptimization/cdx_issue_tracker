@@ -11,6 +11,7 @@ function toggle_create() {
         document.getElementById("login_div").style.display = "flex";
         document.getElementById("create_acc").style.display = "none";
         //document.getElementById("create_user_form").reset(); //This'll mess things up
+        
     } else {
         document.getElementById("login_div").style.display = "none";
         document.getElementById("create_acc").style.display = "flex";
@@ -19,7 +20,7 @@ function toggle_create() {
 }
 
 function show_created() {
-    document.getElementById("acc_made").style.visibility = "show";
+    document.getElementById("acc_made").style.display = "block";
 }
 </script>
 
@@ -62,6 +63,13 @@ function show_created() {
         <div class="link_container">
             <a onclick="toggle_create()">Back</a>
         </div>
+    </div>
+
+    <div class="forgot_div" id="forgot_pass">
+        <label>Enter Your Email</label>
+        <form>
+            <input type="text" placeholder="Email">
+        </form>
     </div>
 </div>
 {% endblock %}
