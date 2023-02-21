@@ -477,10 +477,28 @@ class Db_helper:
             conn.commit()
             conn.close()
 
-            
+    def delete_project(self, pid):
+        with self.engine.connect() as conn:
+            stmt = delete(self.projects_users).where(self.projects_users.c.project_id == pid)
+            conn.execute(stmt)
+            stmt = delete(self.ticket).where(self.ticket.c.project_id == pid)
+            conn.execute(stmt)
+            stmt = delete(self.col).where(self.col.c.project_id == pid)
+            conn.execute(stmt)
+            stmt = delete(self.project).where(self.project.c.project_id == pid)
+            conn.execute(stmt)
+
+
+            conn.commit()
+            conn.close()
+
+    
+
 dbh = Db_helper()
 pid = 3
 uid = 6
+#dbh.delete_project(45)
+
 #dbh.update_password("3245929300", 4)
 
 #dbh.create_token(6)
