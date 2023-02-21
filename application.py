@@ -282,7 +282,6 @@ def verify_token():
 
 @application.route('/resetpassword', methods=['POST', 'GET'])
 def reset_password():
-    
     if request.method == "POST":
         pw1 = request.form.get("password")
         pw2 = request.form.get("password_confirmation")
@@ -293,6 +292,7 @@ def reset_password():
             dbh.update_password(pw1, session["user_id"])
             session.clear()
             application.secret_key = secrets.token_urlsafe(16) 
+            return redirect("/")
     return render_template("reset_password.html")
         
 if __name__ == "__main__":
