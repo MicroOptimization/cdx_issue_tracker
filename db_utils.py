@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, URL, text, Table, MetaData, Column, Intege
 import os
 import bcrypt
 import datetime
+import secrets
 
 class Db_helper:
     user_account = None
@@ -19,6 +20,8 @@ class Db_helper:
         #sql queries and use them on our sql database.
         
         metadata_obj = MetaData()
+        
+        #these are representations of our tables, that we'll use to reference later when we're making queries.
         self.user_account = Table(
             "user_account",
             metadata_obj,
@@ -70,6 +73,15 @@ class Db_helper:
             Column("col_id", Integer),
             Column("col_title", String),
             Column("project_id", Integer),    
+        )
+
+        self.password_token = Table(
+            "password_token",
+            metadata_obj,
+            Column("token_id", Integer),
+            Column("chars", String),
+            Column("date_created", String),
+            Column("user_id", Integer),
         )
 
     def create_user(self, username_input, password_input, email_input):
@@ -411,11 +423,30 @@ class Db_helper:
             conn.close()
             return len(rows) != 0 
 
+    def create_token(self, uid):
+        token = secrets.token_hex(3)
+        print("1")
+        with self.engine.connect() as conn:  
+            print("2")
+            stmt = select(self.password_token).where(self.password_token.c.user_id == uid) #check if old token exists
+            res = conn.execute(stmt)
+            rows = res.mappings().all()
+            if rows != 0: #previous token exists  
+                print("3") 
+                stmt = delete(self.password_token).where(self.password_token.c.user_id == uid) #remove previous token
+                conn.execute(stmt)
+            print("4")
+            stmt = insert(self.password_token).values(chars=token,user_id=uid) #add new token
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
 
 dbh = Db_helper()
 pid = 3
 uid = 6
 
-print(dbh.check_email("parma@gmail.com"))
+dbh.create_token(6)
+
+#print(dbh.check_email("parma@gmail.com"))
 
 

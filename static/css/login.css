@@ -86,6 +86,7 @@ form * {
     border-radius:7px;
     border-width:1px;
     
+    background-color:white;
 }
 
 
@@ -121,6 +122,28 @@ a {
     display:none;
 }
 
+
+
 .forgot_div {
-    display:none;
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    
+}
+
+.forgot_div div {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    
+    align-items:center;
+}
+
+.forgot_div div form {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }

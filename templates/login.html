@@ -22,6 +22,16 @@ function toggle_create() {
 function show_created() {
     document.getElementById("acc_made").style.display = "block";
 }
+
+function toggle_forgot() {
+    if (document.getElementById("login_div").style.display == "none") {
+        document.getElementById("login_div").style.display = "flex";
+        document.getElementById("forgot_pass").style.display = "none";
+    } else {
+        document.getElementById("forgot_pass").style.display = "flex";
+        document.getElementById("login_div").style.display = "none";
+    }
+}
 </script>
 
 {% endblock %}
@@ -44,7 +54,7 @@ function show_created() {
         <label id="acc_made">Account Created Successfully</label>
         <div class="link_container">
             <a onclick="toggle_create()">Create account</a>
-            <a>Forgot password?</a>
+            <a onclick="toggle_forgot()">Forgot password?</a>
         </div>
     </div>
 
@@ -65,11 +75,20 @@ function show_created() {
         </div>
     </div>
 
-    <div class="forgot_div" id="forgot_pass">
-        <label>Enter Your Email</label>
-        <form>
-            <input type="text" placeholder="Email">
+    <div class="create_acc_divs" id="forgot_pass">
+        <div class="header_div">
+            <h2 class="login_header">Forgot Your Password?</h2>
+        </div>
+    
+        <label>Enter your Email</label>
+        <form class="login_form" method="POST">
+            <input type="text" placeholder="Email" name="email_form">
+            <input type="submit" class="login_button" value="Verify" formaction="/forgotpassword">
         </form>
+
+        <div class="link_container">
+            <a onclick="toggle_forgot()">Back</a>
+        </div>
     </div>
 </div>
 {% endblock %}

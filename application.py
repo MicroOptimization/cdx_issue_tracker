@@ -1,9 +1,20 @@
 from flask import Flask, render_template, request, session, redirect, g, jsonify
+from flask_mail import Mail, Message
 from db_utils import Db_helper
 import secrets
+import os
 
 application = Flask(__name__)
 application.secret_key = secrets.token_urlsafe(16)
+
+#mail server stuff
+application.config['MAIL_SERVER']='smtp.gmail.com'
+application.config['MAIL_PORT'] = 465
+application.config['MAIL_USERNAME'] = 'SpaghettiHorseRadish@gmail.com'
+application.config['MAIL_PASSWORD'] = os.environ["mail_password"]
+application.config['MAIL_USE_TLS'] = False
+application.config['MAIL_USE_SSL'] = True
+mail = Mail(application)
 
 @application.context_processor
 def inject_user():
@@ -233,6 +244,24 @@ def update_col():
         dbh.edit_col(cid, new_title)
     results = {'updated': 'true'}
     return jsonify(results)
+
+@application.route('/forgotpassword', methods=['POST', 'GET'])
+def forgotpassword():
+    if request.method == "POST":
+        email = request.form.get("email_form")
+        dbh = Db_helper()
+        is_valid = dbh.check_email(email)
+        if is_valid:
+            #send_password_reset(email)
+            return redirect("/")
+        else:
+            return redirect("/")
+    return redirect("/")
+
+def send_password_reset(email):
+    msg = Message('Resetting your CTech Issue Tracker password:', sender = 'SpaghettiHorseRadish@gmail.com', recipients = [email])
+    msg.body = "Your Password Reset code is:"
+    mail.send(msg)
 
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)
