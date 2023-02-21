@@ -446,6 +446,7 @@ class Db_helper:
             rows = res.mappings().all()
 
             if len(rows) != 0: #token exists
+                #now we're gonna check if the user submitted the token on time
                 date_created = rows[0]["date_created"]
                 current_time = datetime.now()
                 td = current_time - date_created #td = time delta which is what you get from doing math with datetime objects
@@ -461,9 +462,26 @@ class Db_helper:
             else:
                 conn.close()
                 return False #len of rows is 0, so token DNE in our DB
+            
+    def update_password(self, new_pw, uid):
+        with self.engine.connect() as conn:
+            passwd = new_pw #password input for when you're making your password for the first time
+
+            #Do both of these for when you make a pw for the first time or reset your pw
+            salt = bcrypt.gensalt()
+            hashed = bcrypt.hashpw(passwd.encode('utf8'), salt)
+            password_hash = hashed.decode('utf8') # decode the hash to prevent is encoded twice
+
+            stmt = update(self.user_account).where(self.user_account.c.user_id == uid).values(pword=password_hash)
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
+
+            
 dbh = Db_helper()
 pid = 3
 uid = 6
+#dbh.update_password("3245929300", 4)
 
 #dbh.create_token(6)
 #536d5f

@@ -255,9 +255,9 @@ def forgot_password():
         if is_valid:
             uid = dbh.get_uid_by_email(email)
             token = dbh.create_token(uid)
-            
-            #send_password_reset(email, token)
-            return redirect("/")
+            session["user_id"] = uid
+            send_password_reset(email, token)
+            return redirect("/verifytoken")
         else:
             return redirect("/")
     return redirect("/")
@@ -271,11 +271,29 @@ def send_password_reset(email, token):
 def verify_token():
     if request.method == "POST":
         token = request.form.get("token")
-        
-        reset_password = False
-        token_correct = True
-        return render_template("token_verification.html", token_correct=token_correct, reset_password=reset_password)
+        dbh = Db_helper()
+        is_valid = False
+        is_valid = dbh.verify_token(token) #checks if token is in db and also within time limit 
+        if not is_valid:
+            return render_template("token_verification.html", token_correct=is_valid, reset_password=is_valid)
+        else:
+            return redirect("/resetpassword")    
     return render_template("token_verification.html")
 
+@application.route('/resetpassword', methods=['POST', 'GET'])
+def reset_password():
+    
+    if request.method == "POST":
+        pw1 = request.form.get("password")
+        pw2 = request.form.get("password_confirmation")
+        if pw1 != pw2:
+            return render_template("reset_password.html", pw_confirmed=False)
+        else:
+            dbh = Db_helper()
+            dbh.update_password(pw1, session["user_id"])
+            session.clear()
+            application.secret_key = secrets.token_urlsafe(16) 
+    return render_template("reset_password.html")
+        
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)
