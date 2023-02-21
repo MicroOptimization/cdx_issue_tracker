@@ -24,6 +24,13 @@ function toggle_col_modal() {
     column_modal.style.display = "block"
 }
 
+function toggle_delete_project_modal() {
+    modal.style.display = "block";
+    
+    proj_delete_modal.style.display = "block"
+}
+
+
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
