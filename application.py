@@ -246,22 +246,36 @@ def update_col():
     return jsonify(results)
 
 @application.route('/forgotpassword', methods=['POST', 'GET'])
-def forgotpassword():
+def forgot_password():
     if request.method == "POST":
-        email = request.form.get("email_form")
         dbh = Db_helper()
+        email = request.form.get("email_form")
+
         is_valid = dbh.check_email(email)
         if is_valid:
-            #send_password_reset(email)
+            uid = dbh.get_uid_by_email(email)
+            token = dbh.create_token(uid)
+            
+            #send_password_reset(email, token)
             return redirect("/")
         else:
             return redirect("/")
     return redirect("/")
 
-def send_password_reset(email):
+def send_password_reset(email, token):
     msg = Message('Resetting your CTech Issue Tracker password:', sender = 'SpaghettiHorseRadish@gmail.com', recipients = [email])
-    msg.body = "Your Password Reset code is:"
+    msg.body = "Your Password Reset code is: " + token + " (Do not share this with anybody)"
     mail.send(msg)
+
+@application.route('/verifytoken', methods=['POST', 'GET'])
+def verify_token():
+    if request.method == "POST":
+        token = request.form.get("token")
+        
+        reset_password = False
+        token_correct = True
+        return render_template("token_verification.html", token_correct=token_correct, reset_password=reset_password)
+    return render_template("token_verification.html")
 
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

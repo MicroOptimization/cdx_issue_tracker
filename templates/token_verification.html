@@ -1,0 +1,22 @@
+{% extends 'boilerplate.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/token_verification.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="everything">
+    <div class="verify_div">
+        <h2>Verify token:</h2>
+        <form method="POST">
+            <input type="text" placeholder="token" name="token">
+            <input type="submit">
+        </form>
+        <label id="token_incorrect">Token incorrect</label>
+    </div>
+</div>
+
+
+{% endblock %}

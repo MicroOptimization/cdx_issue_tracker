@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, URL, text, Table, MetaData, Column, Integer, String, select, delete, update, insert
 import os
 import bcrypt
-import datetime
+from datetime import datetime, timedelta
 import secrets
 
 class Db_helper:
@@ -425,27 +425,50 @@ class Db_helper:
 
     def create_token(self, uid):
         token = secrets.token_hex(3)
-        print("1")
         with self.engine.connect() as conn:  
-            print("2")
             stmt = select(self.password_token).where(self.password_token.c.user_id == uid) #check if old token exists
             res = conn.execute(stmt)
             rows = res.mappings().all()
-            if rows != 0: #previous token exists  
-                print("3") 
+            if len(rows) != 0: #previous token exists   
                 stmt = delete(self.password_token).where(self.password_token.c.user_id == uid) #remove previous token
                 conn.execute(stmt)
-            print("4")
             stmt = insert(self.password_token).values(chars=token,user_id=uid) #add new token
             conn.execute(stmt)
             conn.commit()
             conn.close()
 
+            return token
+    
+    def verify_token(self, token):
+        with self.engine.connect() as conn:  
+            stmt = select(self.password_token).where(self.password_token.c.chars == token) #check if token exists
+            res = conn.execute(stmt)
+            rows = res.mappings().all()
+
+            if len(rows) != 0: #token exists
+                date_created = rows[0]["date_created"]
+                current_time = datetime.now()
+                td = current_time - date_created #td = time delta which is what you get from doing math with datetime objects
+                minutes_since_creation = td.seconds // 60 % 60 #for some reason they have seconds and days but not minutes lol idk
+                time_limit = 15 #in minutes, the time after the token is generated in which the user is allowed to submit the token for reset
+                
+                stmt = delete(self.password_token).where(self.password_token.c.chars == token) #delete our old expired token or old but valid token
+                conn.execute(stmt)
+                conn.commit()
+                conn.close()
+
+                return minutes_since_creation < time_limit #token valid if you entered it in time (15 min)
+            else:
+                conn.close()
+                return False #len of rows is 0, so token DNE in our DB
 dbh = Db_helper()
 pid = 3
 uid = 6
 
-dbh.create_token(6)
+#dbh.create_token(6)
+#536d5f
+#2b8b7c
+#print(dbh.verify_token("536d5g"))
 
 #print(dbh.check_email("parma@gmail.com"))
 
