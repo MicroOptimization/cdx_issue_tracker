@@ -481,8 +481,18 @@ class Db_helper:
         with self.engine.connect() as conn:
             stmt = delete(self.projects_users).where(self.projects_users.c.project_id == pid)
             conn.execute(stmt)
+
+            rows = self.get_project_tickets(pid)
+            x = 0
+            ticket_ids = list(map(lambda rows: rows['ticket_id'], rows))
+            for cur_tid in ticket_ids:
+                stmt = delete(self.tickets_users).where(self.tickets_users.c.ticket_id == cur_tid)
+                conn.execute(stmt)
+
+
             stmt = delete(self.ticket).where(self.ticket.c.project_id == pid)
             conn.execute(stmt)
+
             stmt = delete(self.col).where(self.col.c.project_id == pid)
             conn.execute(stmt)
             stmt = delete(self.project).where(self.project.c.project_id == pid)
@@ -497,7 +507,7 @@ class Db_helper:
 dbh = Db_helper()
 pid = 3
 uid = 6
-#dbh.delete_project(45)
+dbh.delete_project(3)
 
 #dbh.update_password("3245929300", 4)
 

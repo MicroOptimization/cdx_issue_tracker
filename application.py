@@ -300,7 +300,7 @@ def delete_project(pid):
     print("deleting project " , pid)
     dbh = Db_helper()
     dbh.delete_project(pid)
-    return redirect("/manageproject/" + str(pid))
+    return redirect("/projects")
 
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)
