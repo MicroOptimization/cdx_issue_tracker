@@ -150,8 +150,8 @@ class Db_helper:
 
             conn.commit()
             conn.close()
-            return True
-        return False
+            return pid
+        return -1
     
     def get_uid_by_email(self, email):
         with self.engine.connect() as conn:
@@ -502,7 +502,13 @@ class Db_helper:
             conn.commit()
             conn.close()
 
-    
+    def get_user_info_by_uid(self, uid):
+        with self.engine.connect() as conn:
+            stmt = select(self.user_account).where(self.user_account.c.user_id == uid)
+            res = conn.execute(stmt)
+            row = res.mappings().all()[0]
+            conn.close()
+            return row #dict of user info
 
 dbh = Db_helper()
 pid = 3

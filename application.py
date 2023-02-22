@@ -18,7 +18,7 @@ mail = Mail(application)
 
 @application.context_processor
 def inject_user():
-    return dict(username=session.get("username"))
+    return dict(username=session.get("username"), uid=session.get("user_id"))
         
 @application.route("/", methods =["GET", "POST"]) #the login page
 def main():
@@ -75,9 +75,9 @@ def add_project():
     if request.method == "POST":
         project_details = (request.form.get("pinput"), request.form.get("kinput"), request.form.get("dinput"))
         dbh = Db_helper()
-        res = dbh.create_project(project_details, session["user_id"])
+        pid = dbh.create_project(project_details, session["user_id"])
         #maybe return a render template for the project page that you just made
-        pass
+        return redirect("/project/" + str(pid))
     return render_template("add_project.html")
 
 @application.route("/projects")
@@ -297,10 +297,18 @@ def reset_password():
 
 @application.route('/deleteproject/<int:pid>')
 def delete_project(pid):
-    print("deleting project " , pid)
     dbh = Db_helper()
     dbh.delete_project(pid)
     return redirect("/projects")
+
+@application.route("/profile/<int:uid>")
+def profile(uid):
+    user_info = {}
+    dbh = Db_helper()
+    user_info = dbh.get_user_info_by_uid(uid)
+    tickets = dbh.get_user_tickets(uid)
+    print(tickets)
+    return render_template("profile.html", user_info=user_info, tickets=tickets)
 
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)

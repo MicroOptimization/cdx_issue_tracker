@@ -1,0 +1,95 @@
+.bg {
+    background-color: #FAEBD7;
+    height:100%;
+    width:100%;
+
+    display:flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+}
+
+.columns {
+    height:100%;
+    width: 35%;
+    background-color: #DCDCDC;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.left_column {
+    justify-content: center;
+}
+
+
+.basic_info {
+    display:flex;
+    flex-direction:column;
+}
+
+#profile_header {
+    border-bottom: 1px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size:2rem;
+    margin-bottom:0px;
+}
+
+.info_labels {
+    font-size:1.5rem;
+    padding:1.5rem;
+}
+
+.reset_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top:75px;
+    padding-bottom:75px;
+}
+
+.reset_buttons button {
+    height:50px;
+}
+
+.right_column_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 80%;
+
+}
+
+.body_divs {
+    background-color: #FFFFFF;
+    width:100%;
+
+}
+
+.context_div {
+    background-color: #FFFFFF;
+    height:75%;
+}
+
+
+
+.ticket_div {
+    
+    width:80%;
+    background-color:aquamarine;
+    margin-bottom:5px;
+    padding:5px;
+}
+
+#tickets_div {
+    display: flex;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.ticket_header {
+    padding-left:15px;
+    padding-bottom:0px;
+}
+

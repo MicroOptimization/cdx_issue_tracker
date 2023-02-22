@@ -1,0 +1,48 @@
+{% extends 'base_navbars.html' %}
+
+{% block innerhead %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+
+{% block innerbody %}
+<div class="bg">
+    <div class="right_column columns">
+        <h2 id="profile_header">Profile: </h2>
+
+        <div class="right_column_body">
+            <div class="basic_info body_divs">
+                <label class="info_labels">Username: {{ user_info["username"] }}</label>
+                <label class="info_labels">Email: {{ user_info["email"] }}</label>
+            </div>
+
+            <div class="reset_buttons body_divs">
+                <button>Change Email</button>
+                <button>Change Password</button>
+                <button onclick="toggle_ticket()">View Tickets</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="left_column columns">
+        <div class="context_div">
+            <div id="email_div">
+            </div>
+
+            <div id="password_div">
+            </div>
+
+            <div id="tickets_div">
+                <h2 class="ticket_header">Your Tickets: </h2>
+                {% for ticket in tickets %}
+                    <div class="ticket_div">
+                        <a class="ticket_link" href="/ticket/{{ ticket[0]['ticket_id'] }}">{{ ticket[0]["title"] }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='scripts/profile.js')}}"></script>
+{% endblock %}
