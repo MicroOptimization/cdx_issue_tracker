@@ -8,7 +8,7 @@
 {% block innerbody %}
 <div class="bg">
     <div class="right_column columns">
-        <h2 id="profile_header">Profile: </h2>
+        <h2 id="profile_header">Profile:</h2>
 
         <div class="right_column_body">
             <div class="basic_info body_divs">
@@ -18,7 +18,12 @@
 
             <div class="reset_buttons body_divs">
                 <button>Change Email</button>
-                <button>Change Password</button>
+
+                <form method="POST">
+                    <input type="hidden" name="email_form" value="{{ user_info['email'] }}">
+                    <button formaction="/forgotpassword">Change Password</button> <!--Very cool way to turn a button into a anchor tag lol-->
+                </form>
+
                 <button onclick="toggle_ticket()">View Tickets</button>
             </div>
         </div>
@@ -27,9 +32,6 @@
     <div class="left_column columns">
         <div class="context_div">
             <div id="email_div">
-            </div>
-
-            <div id="password_div">
             </div>
 
             <div id="tickets_div">

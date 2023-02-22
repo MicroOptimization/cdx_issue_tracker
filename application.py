@@ -247,7 +247,9 @@ def update_col():
 
 @application.route('/forgotpassword', methods=['POST', 'GET'])
 def forgot_password():
+    print("here")
     if request.method == "POST":
+        print("here 2")
         dbh = Db_helper()
         email = request.form.get("email_form")
 
@@ -301,13 +303,15 @@ def delete_project(pid):
     dbh.delete_project(pid)
     return redirect("/projects")
 
-@application.route("/profile/<int:uid>")
+@application.route("/profile/<int:uid>", methods=["POST", "GET"])
 def profile(uid):
+    if request.method == "POST":
+        print("pf")
     user_info = {}
     dbh = Db_helper()
     user_info = dbh.get_user_info_by_uid(uid)
     tickets = dbh.get_user_tickets(uid)
-    print(tickets)
+    
     return render_template("profile.html", user_info=user_info, tickets=tickets)
 
 if __name__ == "__main__":
