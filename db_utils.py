@@ -487,7 +487,7 @@ class Db_helper:
             conn.execute(stmt)
             stmt = delete(self.project).where(self.project.c.project_id == pid)
             conn.execute(stmt)
-
+            #we gotta delete tickets_users's entry lol. #revisit me
 
             conn.commit()
             conn.close()

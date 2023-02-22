@@ -27,7 +27,13 @@ function toggle_col_modal() {
 function toggle_delete_project_modal() {
     modal.style.display = "block";
     
-    proj_delete_modal.style.display = "block"
+    proj_delete_modal.style.display = "block" //change this to flex lol
+}
+
+function close_delete_project_modal() {
+    modal.style.display = "none";
+    
+    proj_delete_modal.style.display = "none" 
 }
 
 

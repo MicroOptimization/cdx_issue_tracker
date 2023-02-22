@@ -178,11 +178,18 @@
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
 
-    display:flex;
+    display:flex; /*change to flex if you wanna style it lol*/
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-
+.proj_delete_btn_div a {
+    border: 1px solid black;
+    padding:0.5px 5px;
+    
+    background-color:rgb(211, 200, 200);   
+    color: rgb(180, 52, 52);
+    border-radius: 5px;
+}
 

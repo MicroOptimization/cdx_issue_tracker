@@ -82,8 +82,8 @@
         <div class="modal_content_column" id="proj_delete_modal">
             <label>Are you sure you want to delete this project? <b>This action is irreversible</b></label>
             <div class="proj_delete_btn_div">
-                <button>Yes</button>
-                <button>Cancel</button>
+                <a href="/deleteproject/{{ pid }}">Yes</a>
+                <button onclick="close_delete_project_modal()">Cancel</button>
             </div>
         </div>
     </div>

@@ -294,6 +294,13 @@ def reset_password():
             application.secret_key = secrets.token_urlsafe(16) 
             return redirect("/")
     return render_template("reset_password.html")
-        
+
+@application.route('/deleteproject/<int:pid>')
+def delete_project(pid):
+    print("deleting project " , pid)
+    dbh = Db_helper()
+    dbh.delete_project(pid)
+    return redirect("/manageproject/" + str(pid))
+
 if __name__ == "__main__":
     application.run(debug=True, use_reloader=True, threaded=True)
