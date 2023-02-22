@@ -305,13 +305,21 @@ def delete_project(pid):
 
 @application.route("/profile/<int:uid>", methods=["POST", "GET"])
 def profile(uid):
-    if request.method == "POST":
-        print("pf")
-    user_info = {}
     dbh = Db_helper()
     user_info = dbh.get_user_info_by_uid(uid)
     tickets = dbh.get_user_tickets(uid)
-    
+    if request.method == "POST":
+        pword = request.form.get("password")
+        
+        new_email = request.form.get("email")
+        pword_correct = dbh.login(user_info["username"], pword)[0]
+        if pword_correct:
+            dbh.edit_email(user_info["user_id"], new_email)
+        else:
+            print("pword incorrect")
+            
+        user_info = dbh.get_user_info_by_uid(uid)
+        return render_template("profile.html", user_info=user_info, tickets=tickets, pword_correct=pword_correct)
     return render_template("profile.html", user_info=user_info, tickets=tickets)
 
 if __name__ == "__main__":

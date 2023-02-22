@@ -120,7 +120,7 @@ class Db_helper:
             rd = result.mappings().all()
             if len(rd) == 0:
                 #no username in db
-                print("here")
+                print("no username in db")
                 return (False, None)
             else:
                 correct_password = rd[0]["pword"]
@@ -129,8 +129,6 @@ class Db_helper:
                 else:
                     return (False, None)
         return (False, None)
-    
-
 
     def create_project(self, project_details, uid):
         with self.engine.connect() as conn:
@@ -509,11 +507,18 @@ class Db_helper:
             row = res.mappings().all()[0]
             conn.close()
             return row #dict of user info
+        
+    def edit_email(self, uid, new_email):
+        with self.engine.connect() as conn:
+            stmt = update(self.user_account).where(self.user_account.c.user_id == uid).values(email=new_email)
+            conn.execute(stmt)
+            conn.commit()
+            conn.close()
 
 dbh = Db_helper()
 pid = 3
 uid = 6
-dbh.delete_project(3)
+#dbh.delete_project(3)
 
 #dbh.update_password("3245929300", 4)
 

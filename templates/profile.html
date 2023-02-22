@@ -17,7 +17,7 @@
             </div>
 
             <div class="reset_buttons body_divs">
-                <button>Change Email</button>
+                <button onclick="toggle_email()">Change Email</button>
 
                 <form method="POST">
                     <input type="hidden" name="email_form" value="{{ user_info['email'] }}">
@@ -32,6 +32,22 @@
     <div class="left_column columns">
         <div class="context_div">
             <div id="email_div">
+                
+                <h2 class="ticket_header">Reset Your Email:</h2>
+                <form method="POST">
+                    <label>New Email:</label>
+                    <input type="text" placeholder="New Email" name="email">
+                    <label>Current Password:</label>
+                    <input type="password" placeholder="Password" name="password">
+                    <input type="submit" value="Change" id="email_submit">
+                </form>
+                {% if pword_correct is defined %}
+                    {% if not pword_correct %}
+                        <label>Password Incorrect</label>
+                    {% else %}                    
+                        <label>Email Changed</label>
+                    {% endif %}
+                {% endif %}
             </div>
 
             <div id="tickets_div">

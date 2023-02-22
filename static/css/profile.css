@@ -93,3 +93,23 @@
     padding-bottom:0px;
 }
 
+#email_div {
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+}
+
+#email_div form {
+    display:flex;
+    flex-direction:column;
+    width:25%;
+}
+
+#email_div form label {
+    margin-top:20px;
+}
+
+#email_submit {
+    margin-top:20px;
+}
