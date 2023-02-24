@@ -33,7 +33,6 @@ def main():
         if len(login_info) == 2: #we've identified that we're TRYING to log in
             res = dbh.login(login_info[0], login_info[1])
             if res[0]: #if login succeeded
-                print("log in success")
                 application.secret_key = secrets.token_urlsafe(16) #so this resets the session
                 #res[1] is a dict of all the columns from the user row we got when we did dbh.login
 
@@ -43,7 +42,6 @@ def main():
 
                 return redirect("/home") #lets you into the home page
             else: #incorrect password or username.
-                print("login failed")
                 return redirect("/")
         elif len(create_info) == 3: #we've identified that we're TRYING to make a new account
             if dbh.create_user(create_info[0], create_info[1], create_info[2]): #dbh.create_user will return true if the account was made successfully
