@@ -54,7 +54,7 @@
                 <h2 class="ticket_header">Your Tickets: </h2>
                 {% for ticket in tickets %}
                     <div class="ticket_div">
-                        <a class="ticket_link" href="/ticket/{{ ticket[0]['ticket_id'] }}">{{ ticket[0]["title"] }}</a>
+                        <a class="ticket_link" href="/ticket/{{ ticket['ticket_id'] }}">{{ ticket["title"] }}</a>
                     </div>
                 {% endfor %}
             </div>

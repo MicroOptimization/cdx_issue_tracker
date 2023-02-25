@@ -4,3 +4,4 @@ __pycache__/
 
 bcrypt_pw_gen.py
 temp.py
+not_jira.sql

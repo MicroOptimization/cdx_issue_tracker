@@ -229,9 +229,10 @@ class Db_helper:
             tickets = []
             for row in rows: #populates list tickets by going through each u/t pair and getting the corresponding ticket 
                 tid = row["ticket_id"] 
+
                 stmt = select(self.ticket).where(self.ticket.c.ticket_id == tid)
                 res2 = conn.execute(stmt)
-                rows2 = res2.mappings().all() #dict of the current row of tid 
+                rows2 = res2.mappings().all()[0] #dict of the current row of tid 
                 tickets.append(rows2)
 
             conn.close()

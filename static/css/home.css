@@ -99,7 +99,9 @@
     
     padding:20px;
     padding-bottom:0px;
-    
+    height:25%;
+
+    width:30%;
 }
 
 .ticket_list_header {
@@ -110,8 +112,12 @@
 }
 
 .ticket_list {
-    padding-left:0px;
+    padding:0px;
     margin-left:17px;
+    margin-top:15px;
+    height:100%;
+
+    list-style-type: square;
 }
 
 .ticket_list * {
@@ -127,3 +133,34 @@
     margin:0px;
 }
 
+.ticket_list_item {
+    display:flex;
+    flex-direction:row;
+
+    width:100%;
+    height:25%;
+    margin-left:15px;
+}
+
+.ticket_title_div .ticket_desc_div {
+    
+    height:100%;
+}
+
+.ticket_title_div {
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+
+    border-right: 1px solid black;
+    min-width:30%;
+    max-width:30%;
+}
+
+.ticket_desc_div {
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+
+    padding-left: 15px;
+}

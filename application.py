@@ -60,12 +60,18 @@ def logout():
 
 @application.route("/home")
 def home():
-    return render_template("home.html")
+    dbh = Db_helper()
+    tickets = dbh.get_user_tickets(session.get("user_id"))
+    newlist = sorted(tickets, key=lambda d: d['date_created'], reverse=True)
+    if len(newlist) > 3:
+        newlist = newlist[0:3]
+    
+    return render_template("home.html", recent_tickets=newlist)
 
 @application.route("/alltickets")
 def all_tickets():
     dbh = Db_helper()
-    tickets = dbh.get_user_tickets(session["user_id"])
+    tickets = dbh.get_user_tickets(session.get("user_id"))
     return render_template("all_tickets.html", tickets=tickets)
 
 @application.route("/newproject", methods=["GET", "POST"])
