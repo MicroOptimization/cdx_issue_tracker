@@ -516,18 +516,6 @@ class Db_helper:
             conn.commit()
             conn.close()
 
-dbh = Db_helper()
-pid = 3
-uid = 6
-#dbh.delete_project(3)
 
-#dbh.update_password("3245929300", 4)
-
-#dbh.create_token(6)
-#536d5f
-#2b8b7c
-#print(dbh.verify_token("536d5g"))
-
-#print(dbh.check_email("parma@gmail.com"))
 
 
