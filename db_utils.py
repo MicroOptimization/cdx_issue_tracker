@@ -11,10 +11,13 @@ class Db_helper:
     def __init__(self):
         url_object = URL.create(
             "postgresql+psycopg2",
-            username="codiacs",
-            password=os.environ["pg_pw"],  # DO NOT ESCAPE THIS PASSWORD 
-            host="ctech-issues-db.cxialfld5awl.us-east-2.rds.amazonaws.com",
-            database="definitely_not_jira",
+            username="postgres",
+            #username="codiacs",
+            password=os.environ['pg_pw_local'],  # DO NOT ESCAPE THIS PASSWORD 
+            #host="ctech-issues-db.cxialfld5awl.us-east-2.rds.amazonaws.com",
+            #database="definitely_not_jira",
+            host="localhost",
+            database="not_jira",
         )
         self.engine = create_engine(url_object) #engines are a connection factory essentially, and we use connections to have our orm generate
         #sql queries and use them on our sql database.
